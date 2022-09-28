@@ -17,7 +17,25 @@ cloudinary.config({
     api_secret:process.env.api_secret
 })
 
+//express fileupload
+app.use(require('express-fileupload')({useTempFiles:true}))
+
+//express session
+app.use(require('express-session')({secret:process.env.secret, resave:true, saveUninitialized:true, cookie:{expires:2678400000}}))
+
+//mongoose
+const mongoose= require('mongoose')
+mongoose.connect(process.env.mongolink,{useUnifiedTopology:true,useNewUrlParser:true}).then(res=>{
+    if (res) {
+        console.log('db connected');
+        app.listen(port, () => console.log(`listening on port ${port}!`))
+
+    } else {
+        console.log('db not conected');
+    }
+})
+
+app.set('view engine', 'ejs')
+
 app.get('/', (req, res) => res.send('Hello World!'))
 
-
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
