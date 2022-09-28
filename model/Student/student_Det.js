@@ -20,7 +20,7 @@ const StudentDet = new Schema({
     PhnNo:{
         required:true,
         type:String,
-        
+        unique:true
     },
     imgUrl:{
         required:true,

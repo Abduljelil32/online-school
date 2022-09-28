@@ -43,3 +43,4 @@ app.use('/', require('./router/student/home'))// student home
 
 app.use('/register', require('./router/student/auth/register'))// student register
 
+app.use('/login', require('./router/student/auth/login'))// student login
