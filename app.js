@@ -37,5 +37,9 @@ mongoose.connect(process.env.mongolink,{useUnifiedTopology:true,useNewUrlParser:
 
 app.set('view engine', 'ejs')
 
-app.get('/', (req, res) => res.send('Hello World!'))
+
+////////////////////////////////////////////student////////////////////////////////////////////////////
+app.use('/', require('./router/student/home'))// student home
+
+app.use('/register', require('./router/student/auth/register'))// student register
 
