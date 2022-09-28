@@ -46,7 +46,7 @@ router.post('/',async(req,res)=>{
                         await addAuth.save()
                         await addDET.save()
                         sess.student = collect.Email
-                        res.redirect('/verification')
+                        res.redirect('/v/otp')
                     } else {
                         res.render('student/auth/register',{msg:'Invalid filetype'})
                     }

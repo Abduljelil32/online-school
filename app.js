@@ -17,6 +17,9 @@ cloudinary.config({
     api_secret:process.env.api_secret
 })
 
+//morgan
+app.use(require('morgan')('dev'))
+
 //express fileupload
 app.use(require('express-fileupload')({useTempFiles:true}))
 
@@ -44,3 +47,6 @@ app.use('/', require('./router/student/home'))// student home
 app.use('/register', require('./router/student/auth/register'))// student register
 
 app.use('/login', require('./router/student/auth/login'))// student login
+
+app.use('/v', require('./router/student/auth/verify'))// student Verify
+
