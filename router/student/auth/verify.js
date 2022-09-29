@@ -209,8 +209,8 @@ router.post('/reset/:rescode/:uId',async(req,res)=>{
                                 subject: `Mr/Mrs ${det.Fname} ${det.Lname} password Reset`,
                                 html:`
                                 <body>
-                <center><h3>click the link below to reset your password</h3></center>
-<center><a href="${process.env.website}/v/reset/${reset}/${user._id}">click me</a></center>
+                <center><h3>Your password has been reset</h3></center>
+<center><a href="${process.env.website}">Visit US</a></center>
                 
             </body>`
                         }
