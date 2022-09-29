@@ -51,8 +51,8 @@ app.use('/login', require('./router/student/auth/login'))// student login
 app.use('/v', require('./router/student/auth/verify'))// student Verify
 
 
-
 // //////////////////////////////////////Admin routes////////////////////////////////////
 app.use('/adminLogin', require('./router/school/login')) //admin Home
 
 app.use('/admin', require('./router/school/dashboard'))
+app.use('/createCourse', require('./router/school/createCourse')) // createCourse
