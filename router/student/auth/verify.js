@@ -6,6 +6,7 @@ const randToken =require('rand-token').generator()
 
 const mailer = require('nodemailer');
 const auth = require('../../../model/Student/auth');
+// const { uid } = require('rand-token');
 // const auth = require('../../../model/Student/auth');
 const myemail = mailer.createTransport({
     service:process.env.service,
@@ -165,14 +166,75 @@ router.get('/reset/:rescode/:uId',async(req,res)=>{
     
     try {
         if (uID.length==24 && rescode.length==16) {
-            
+            const chkUID= await student.findOne({_id:uID})
+            if (chkUID) {
+                const checkreset= await auth.findOne({stdID:uid})
+                if (checkreset) {
+                    res.render('student/auth/verify/reset2',{msg:'', userID:uID, resetID: rescode})
+                } else {
+                    res.status(404).render('404')
+                }
+            } else {
+            res.status(404).render('404')
+                
+            }
         } else {
-            res.status()
+            res.status(404).render('404')
         }
     } catch (error) {
         console.log(error);
     }
 })
 
+
+router.post('/reset/:rescode/:uId',async(req,res)=>{
+    const rescode= req.params.rescode,
+        uID= req.params.uId,
+        collect = req.body;
+
+    try {
+        if (uID.length==24 && rescode.length==16) {
+            const chkUID= await student.findOne({_id:uID})
+            if (chkUID) {
+                const checkreset= await auth.findOne({stdID:uID})
+                if (checkreset) {
+                    if (collect.pass!=null) {
+                        if ((collect.pass).length>6) {
+                            const det = await student_Det.findOne({})
+                            await student.updateOne({_id:uID},{password:bcrypt.hashSync(collect.pass,10)})
+                            await auth.updateOne({stdID:uID},{OTP:randToken.generate(4,'1234567890'), reset:randToken.generate(24,'1234567890qwertyuiopasdfghjklzxcvbnm$')})
+                            const mailoption= {
+                                from: `${process.env.schoolName} <${process.env.email}>`,
+                                to: chkUID.Email,
+                                subject: `Mr/Mrs ${det.Fname} ${det.Lname} password Reset`,
+                                html:`
+                                <body>
+                <center><h3>click the link below to reset your password</h3></center>
+<center><a href="${process.env.website}/v/reset/${reset}/${user._id}">click me</a></center>
+                
+            </body>`
+                        }
+                        await myemail.sendMail(mailoption)
+                        } else {
+                    res.render('student/auth/verify/reset2',{msg:'password should be greater than 6', userID:uID, resetID: rescode})
+                            
+                        }
+                    } else {
+                        res.render('student/auth/verify/reset2',{msg:'fill in your password', userID:uID, resetID: rescode})
+                    }
+                } else {
+                    res.status(404).render('404')
+                }
+            } else {
+            res.status(404).render('404')
+                
+            }
+        } else {
+            res.status(404).render('404')
+        }
+    } catch (error) {
+        console.log(error);
+    }
+})
 
 module.exports= router
