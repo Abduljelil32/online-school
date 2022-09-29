@@ -66,10 +66,11 @@ router.post('/otp',async (req,res)=>{
             if (user) {
                 if (user.verified==false) {
                     const authchk = await auth.findOne({stdID:user._id})
-                    const det = await student_Det({stdID:user._id})
-                    if (collect.OTP!=null) {
+                    const det = await student_Det.findOne({stdID:user._id})
+                    if (collect.otp!=null) {
                         if (collect.otp==authchk.OTP) {
                             await student.updateOne({_id:user._id, Email:sess.student},{verified:true})
+                            await auth.updateOne({stdID:user._id},{OTP:randToken.generate(4,'1234567890'), reset:randToken.generate(16,'1234567890qwertyuiopasdfghjklzxcvbnm$')})
                             const mailoption= {
                                 from: `${process.env.schoolName} <${process.env.email}>`,
                                 to: user.Email,
@@ -110,6 +111,54 @@ router.post('/otp',async (req,res)=>{
 router.get('/reset',async(req,res)=>{
     res.render('student/auth/verify/reset1',{msg:''})
 })
+
+
+router.post('/reset',async (req,res)=>{
+    const collect = req.body
+        try {
+            if (collect.email!=null) {
+                const user= await student.findOne({Email:collect.email})
+            if (user) {
+                    const det = await student_Det.findOne({stdID:user._id})
+                    const otp = randToken.generate(4,'1234567890'),
+                        reset = randToken.generate(16,'1234567890qwertyuiopasdfghjklzxcvbnm$')
+                    await auth.updateOne({stdID:user._id},{OTP:otp, reset})
+
+                        const mailoption= {
+                                from: `${process.env.schoolName} <${process.env.email}>`,
+                                to: user.Email,
+                                subject: `Mr/Mrs ${det.Fname} ${det.Lname} password Reset`,
+                                html:`
+                                <body>
+                <center><h3>click the link below to reset your password</h3></center>
+<center><a href="${process.env.website}/v/reset/${reset}/${user._id}">click me</a></center>
+                
+            </body>`
+                        }
+                        await myemail.sendMail(mailoption)
+                            res.render('success',{tlk:'Sent to email',goTo:'https://mail.google.com/'})
+                        
+                    
+                    
+            
+            } else {
+                res.render('student/auth/verify/reset1',{msg:'email doesnt exist'})
+
+
+            }
+            } else {
+                res.render('student/auth/verify/reset1',{msg:'fill the form'})
+                
+            }
+            
+        } catch (error) {
+            console.log(error);
+            res.render('student/auth/verify/reset1',{msg:'error occured refresh'})
+        }
+    
+})
+
+// router.get
 
 
 module.exports= router
