@@ -107,4 +107,9 @@ router.post('/otp',async (req,res)=>{
 })
 
 
+router.get('/reset',async(req,res)=>{
+    res.render('student/auth/verify/reset1',{msg:''})
+})
+
+
 module.exports= router
