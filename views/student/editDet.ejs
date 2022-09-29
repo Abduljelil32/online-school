@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+<body>
+    <p><%= msg %> </p>
+    <form action="/edit" method="post" enctype="multipart/form-data">
+        
+        <input type="text" name="FName" value="<%= user.Fname %>" placeholder="First Name" id="">
+        <br><br>
+        <input type="text" name="LName" placeholder="Last Name" value="<%= user.Lname %>" id="">
+        <br><br>
+        <input type="tel" name="PhoneNo" placeholder="Phone No" value="<%= user.PhnNo %> " id="">
+        <br><br>
+        <button type="submit">Register</button>
+        <a href="/">Home</a>
+    </form>
+</body>
+</html>
