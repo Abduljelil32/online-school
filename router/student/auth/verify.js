@@ -158,7 +158,21 @@ router.post('/reset',async (req,res)=>{
     
 })
 
-// router.get
+
+router.get('/reset/:rescode/:uId',async(req,res)=>{
+    const rescode= req.params.rescode,
+        uID= req.params.uId;
+    
+    try {
+        if (uID.length==24 && rescode.length==16) {
+            
+        } else {
+            res.status()
+        }
+    } catch (error) {
+        console.log(error);
+    }
+})
 
 
 module.exports= router
