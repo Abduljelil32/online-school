@@ -2,7 +2,7 @@ const mongoose= require('mongoose')
 
 const Schema = mongoose.Schema
 
-const StudentDet = new Schema({
+const stdCourse = new Schema({
     stdID:{
         required:true,
         type:String
@@ -35,4 +35,4 @@ const StudentDet = new Schema({
     },
 })
 
-module.exports= mongoose.model('StudentDet', StudentDet)
+module.exports= mongoose.model('StdCourse', stdCourse)
