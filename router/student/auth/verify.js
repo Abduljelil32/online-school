@@ -215,6 +215,7 @@ router.post('/reset/:rescode/:uId',async(req,res)=>{
             </body>`
                         }
                         await myemail.sendMail(mailoption)
+                        res.redirect('/login')
                         } else {
                     res.render('student/auth/verify/reset2',{msg:'password should be greater than 6', userID:uID, resetID: rescode})
                             
