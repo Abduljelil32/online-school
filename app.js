@@ -57,3 +57,5 @@ app.use('/adminLogin', require('./router/school/login')) // admin login
 app.use('/admin', require('./router/school/dashboard')) // admin Dashboard
 
 app.use('/createCourse', require('./router/school/createCourse')) // createCourse
+
+app.use('/edit', require('./router/school/editCourse')) // Course Edit
