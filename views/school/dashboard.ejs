@@ -9,8 +9,34 @@
 <body>
     <h1>Dashboard</h1>
 
-    <form action="/createCourse" method="post">
+    <form action="/createCourse">
         <input type="submit" value="Create Course">
     </form>
+
+    <div class="courses">
+        <% if (courses.length > 0) { %>
+            <table>
+                <tr>
+                    <th>Course Code</th>
+                    <th>Course Name</th>
+                    <th>Course Price</th>
+                    <th>Actions</th>
+                </tr>
+                <% courses.forEach(course => { %>
+                    <tr>
+                        <td><%= course.CourseCode %></td>
+                        <td><%= course.Name %></td>
+                        <td><%= course.Price %></td>
+                        <td>
+                                <a href="#">Edit</a>
+                                <a href="#">Delete</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </table>
+        <% } else { %>
+            <p>There are no Courses</p>
+        <% } %>
+    </div>
 </body>
 </html>
