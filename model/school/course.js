@@ -10,7 +10,9 @@ const Course = new Schema({
     },
     CourseCode:{
         required:true,
-        type:String
+        type:String,
+        unique:true,
+
     },
     Price:{
         type:Number,

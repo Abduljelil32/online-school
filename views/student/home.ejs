@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <header>
+        <h2>Lincoln</h2>
+        <div>
+            <h4><%= user.Fname %> <%= user.Lname %> </h4>
+            <img src="<%= user.imgUrl %>" alt="<%= user.Fname %>" width="200px" height="200px" style="border-radius: 100px">
+            <a href="/edit">edit Profile</a>
+            <a href="/addcourse">addcourse</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </header>
+    <section>
+        <% if (myCourse.length>0) { %>
+            <% myCourse.forEach(crs => { %>
+                <% var details= allcrs.find(i=>i._id==crs.crsID) %> 
+                <div>
+                  <h3><%= details.Name %></h3> 
+                  <p><%= details.CourseCode %></p> 
+                  <br>
+                  <p ><%= crs.Verified %></p>
+                </div>
+            <% }) %>
+        <% } else { %>
+         <center><h1>No Courses yet</h1></center>
+        <% } %>
+        
+    </section>
+</body>
+</html>
