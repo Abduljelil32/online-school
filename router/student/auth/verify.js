@@ -168,7 +168,7 @@ router.get('/reset/:rescode/:uId',async(req,res)=>{
         if (uID.length==24 && rescode.length==16) {
             const chkUID= await student.findOne({_id:uID})
             if (chkUID) {
-                const checkreset= await auth.findOne({stdID:uid})
+                const checkreset= await auth.findOne({stdID:uID})
                 if (checkreset) {
                     res.render('student/auth/verify/reset2',{msg:'', userID:uID, resetID: rescode})
                 } else {
