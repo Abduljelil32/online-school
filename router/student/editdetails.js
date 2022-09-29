@@ -42,8 +42,13 @@ router.post('/',async(req,res)=>{
             if (stud) {
                 if (stud.verified==true) {
                     const det= await student_Det.findOne({stdID:stud._id})
-                    if (collect.FName!=null &&collect.LName!=null &&collect.PhoneNo!=null) {
-                        
+                    if (collect.FName!=null &&collect.LName!=null ) {
+                        if ((collect.FName).length>2&& (collect.LName).length>3) {
+                            await student_Det.updateOne({stdID:stud._id}, {Fname:collect.FName, Lname:collect.LName});
+                            res.redirect('/')
+                        } else {
+                            res.render('student/editDet',{user:det, info:stud, msg:'fill the inputs well'})
+                        }
                     } else {
                         res.render('student/editDet',{user:det, info:stud, msg:'fill the form'})
                     }                    
