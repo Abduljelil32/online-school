@@ -168,7 +168,7 @@ router.get('/reset/:rescode/:uId',async(req,res)=>{
         if (uID.length==24 && rescode.length==16) {
             const chkUID= await student.findOne({_id:uID})
             if (chkUID) {
-                const checkreset= await auth.findOne({stdID:uid})
+                const checkreset= await auth.findOne({stdID:uID})
                 if (checkreset) {
                     res.render('student/auth/verify/reset2',{msg:'', userID:uID, resetID: rescode})
                 } else {
@@ -215,6 +215,7 @@ router.post('/reset/:rescode/:uId',async(req,res)=>{
             </body>`
                         }
                         await myemail.sendMail(mailoption)
+                        res.redirect('/login')
                         } else {
                     res.render('student/auth/verify/reset2',{msg:'password should be greater than 6', userID:uID, resetID: rescode})
                             
