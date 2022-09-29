@@ -1,3 +1,4 @@
+const course = require('../../model/school/course');
 const StdCRS = require('../../model/StdCRS');
 const student = require('../../model/Student/student');
 const student_Det = require('../../model/Student/student_Det');
@@ -14,7 +15,8 @@ router.get('/',async(req,res)=>{
                 if (stud.verified==true) {
                     const det= await student_Det.findOne({stdID:stud._id})
                     const myCourse= await StdCRS.find({stdID:stud._id})
-                    res.render('student/home',{user:det, info:stud, myCourse})
+                    const allcrs = await course.find({})
+                    res.render('student/home',{user:det, info:stud, myCourse, allcrs})
                 } else {
                     res.redirect('/v/otp')
                 }
@@ -28,6 +30,11 @@ router.get('/',async(req,res)=>{
     } else {
         res.redirect('/register')
     }
+})
+
+router.get('/logout',(req,res)=>{
+    req.session.destroy()
+    res.redirect('/')
 })
 
 module.exports= router
