@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Course</title>
+</head>
+<body>
+    <p><%= schoolAccount.nmbr %> <br> <%= schoolAccount.bank %> <br> <%= schoolAccount.Name %></p>
+    <hr>
+    <form action="/regcourse" method="post" enctype="multipart/form-data">
+        <% if (allCrs.length>0) { %>
+            <% allCrs.forEach(crs => { %>
+                <input type="radio" name="crse" value="<%= crs._id %>" id="">
+                <label for=""><%= crs.Name %> - <%= crs.CourseCode %> - <%= crs.Price %></label><br>
+            <% }) %>
+            <br>
+            <input type="number" placeholder="amount" name="Amount" id=""> 
+<br>
+            <label for="image"><u>reciept:</u></label>
+            <input type="file" name="image" id="">
+            
+            <button type="submit">Add</button>
+         <% } else { %>
+          <h3>no course</h3>
+        <% } %>
+    </form>
+</body>
+</html>
