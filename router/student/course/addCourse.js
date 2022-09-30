@@ -16,7 +16,7 @@ router.get('/',async(req,res)=>{
                     const det= await student_Det.findOne({stdID:stud._id})
                     const allCrs= await course.find({})
                     
-                    res.render('student/course/add', {allCrs ,schoolAccount:{bank:process.env.bankName, nmbr:process.env.acctNumber, Name:process.env.acctName }})
+                    res.render('student/course/add', {allCrs ,schoolAccount:{bank:process.env.bankName, nmbr:process.env.acctNumber, Name:process.env.acctName },msg:''})
                 } else {
 
                     res.redirect('/v/otp')
@@ -45,13 +45,14 @@ router.post('/',async(req,res)=>{
             if (stud) {
                 if (stud.verified==true) {
                     const det= await student_Det.findOne({stdID:stud._id})
-                    if (collect.crse!=null ) {
-                        if ((collect.crse).length==24) {
+                    const allCrs= await course.find({})
+                    if (collect.crse!=null && collect.Amount!=null ) {
+                        if ((collect.crse).length==24 && (collect.Amount).length>1) {
                             const checkcrse = await course.findOne({_id:collect.crse})
                             if (checkcrse) {
                                 const StdCrsCheck = await StdCRS.findOne({stdID:stud._id, crsID:checkcrse._id})
                                 if (StdCrsCheck) {
-                                    res.render('student/course/add',{user:det, info:stud, msg:'Already registered this course'})
+                                    res.render('student/course/add',{allCrs,user:det, info:stud, msg:'Already registered this course',schoolAccount:{bank:process.env.bankName, nmbr:process.env.acctNumber, Name:process.env.acctName }})
                                     
                                 } else {
                                     const reciept = req.files.image;
@@ -62,20 +63,23 @@ router.post('/',async(req,res)=>{
                                             crsID: checkcrse._id,
                                             RecieptIMG:upload.secure_url,
                                             publicID:upload.public_id,
-
+                                            AmountPaid: collect.Amount,
+                                            Verified:false
                                         })
+                                        await addreciept.save()
+                                        res.redirect('/')
                                     } else {
-                                        res.render('student/course/add',{user:det, info:stud, msg:'Invalid file type'})
+                                        res.render('student/course/add',{allCrs,schoolAccount:{bank:process.env.bankName, nmbr:process.env.acctNumber, Name:process.env.acctName },user:det, info:stud, msg:'Invalid file type'})
                                     }
                                 }
                             } else {
-                                res.render('student/course/add',{user:det, info:stud, msg:'Invalid'})
+                                res.render('student/course/add',{allCrs,schoolAccount:{bank:process.env.bankName, nmbr:process.env.acctNumber, Name:process.env.acctName },user:det, info:stud, msg:'Invalid'})
                             }
                         } else {
-                            res.render('student/course/add',{user:det, info:stud, msg:'fill the inputs well'})
+                            res.render('student/course/add',{allCrs,schoolAccount:{bank:process.env.bankName, nmbr:process.env.acctNumber, Name:process.env.acctName },user:det, info:stud, msg:'fill the inputs well'})
                         }
                     } else {
-                        res.render('student/course/add',{user:det, info:stud, msg:'fill the form'})
+                        res.render('student/course/add',{allCrs,schoolAccount:{bank:process.env.bankName, nmbr:process.env.acctNumber, Name:process.env.acctName },user:det, info:stud, msg:'fill the form'})
                     }                    
                 } else {
 
@@ -88,7 +92,7 @@ router.post('/',async(req,res)=>{
             }
         } catch (error) {
             console.log(error);
-            res.render('student/course/add',{user:det, info:stud, msg:'error occured'})
+            res.render('student/course/add',{schoolAccount:{bank:process.env.bankName, nmbr:process.env.acctNumber, Name:process.env.acctName },user:det, info:stud, msg:'error occured'})
 
         }
     } else {

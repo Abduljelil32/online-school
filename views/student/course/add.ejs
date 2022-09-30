@@ -8,7 +8,9 @@
 </head>
 <body>
     <p><%= schoolAccount.nmbr %> <br> <%= schoolAccount.bank %> <br> <%= schoolAccount.Name %></p>
+    <p>state your name nd course Name in registration place</p>
     <hr>
+    <p><%= msg %> </p>
     <form action="/regcourse" method="post" enctype="multipart/form-data">
         <% if (allCrs.length>0) { %>
             <% allCrs.forEach(crs => { %>
