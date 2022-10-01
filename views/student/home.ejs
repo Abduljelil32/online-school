@@ -21,8 +21,8 @@
         <% if (myCourse.length>0) { %>
             <% myCourse.forEach(crs => { %>
                 <% var details= allcrs.find(i=>i._id==crs.crsID) %> 
-                <div>
-                  <h3><%= details.Name %></h3> 
+                <div onclick="move('/student/course/<%= crs._id %>')">
+                  <h3 ><%= details.Name %></h3> 
                   <p><%= details.CourseCode %></p> 
                   <br>
                   <p ><%= crs.Verified %></p>
@@ -34,4 +34,9 @@
         
     </section>
 </body>
+<script>
+    function move(a) {
+        window.location=a
+    }
+</script>
 </html>
