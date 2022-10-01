@@ -2,10 +2,10 @@ const express = require('express')
 
 const router = express.Router()
 
-const courseMod = require('./../../model/school/course')
+const courseMod = require('../../../model/school/course')
 
 router.get('/', (req, res) => {
-    res.render('school/createCourse')
+    res.render('school/courses/createCourse')
 })
 
 router.post('/', async(req, res) => {
@@ -18,7 +18,8 @@ router.post('/', async(req, res) => {
             Price: req.body.price
         })
         await course.save()
-        res.render('school/dashboard', { courses })
+        // res.render('school/dashboard', { courses })
+        res.redirect('/admin/dashboard')
     } catch (err) {
         console.log(err)
         res.redirect('createCourse')

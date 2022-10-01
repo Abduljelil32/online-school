@@ -61,6 +61,12 @@ app.use('/adminLogin', require('./router/school/login')) // admin login
 
 app.use('/admin', require('./router/school/dashboard')) // admin Dashboard
 
-app.use('/createCourse', require('./router/school/createCourse')) // createCourse
+app.use('/createCourse', require('./router/school/courses/createCourse')) // createCourse
 
-app.use('/edit', require('./router/school/editCourse')) // Course Edit
+app.use('/editCourse', require('./router/school/courses/editCourse')) // Course Edit
+
+app.use('/deleteCourse', require('./router/school/courses/deleteCourse')) // Course Delete
+
+app.use('/viewCourse', require('./router/school/courses/viewCourse')) // View Course Details
+
+app.use('/addNote', require('./router/school/courses/notes/addNote')) // Create New Note
