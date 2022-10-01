@@ -23,7 +23,7 @@ router.get('/:id',async(req,res)=>{
                             const allVideo= await video.find({crsID:courseDet._id}),
                                 allnotes = await Notes.find({crsID:courseDet._id}),
                                 det = await student_Det.findOne({stdID:stud._id});
-                            res.render('student/course/home',{user:det, courseDet,allVideo,allnotes})
+                            res.render('student/course/home',{user:det,studentCSR, courseDet,allVideo,allnotes})
                             
                         } else {
                             res.status(404).render('404')
