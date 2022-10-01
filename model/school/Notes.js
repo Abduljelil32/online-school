@@ -19,8 +19,7 @@ const Notes = new Schema({
     },
     PublicID:{
         required:true,
-        type:String,
-        
+        type:String, 
     },
     
 })

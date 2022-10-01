@@ -28,8 +28,9 @@
                         <td><%= course.Name %></td>
                         <td><%= course.Price %></td>
                         <td>
+                                <a href="/viewCourse/<%= course._id %>">View</a>
                                 <a href="/editCourse/<%= course._id %>">Edit</a>
-                                <a href="#">Delete</a>
+                                <a href="/deleteCourse/<%= course._id %>">Delete</a>
                         </td>
                     </tr>
                 <% }) %>
