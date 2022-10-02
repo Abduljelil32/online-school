@@ -15,3 +15,5 @@ var shortUrl = require("node-url-shortener");
     console.log(url);
 });
 console.log('something');
+
+console.log('rand')
