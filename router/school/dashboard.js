@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
 
 router.get('/dashboard', async (req, res) => {
     const courses = await courseMod.find()
+    console.log(courses) 
     res.render('school/dashboard', { courses })
 })
 
