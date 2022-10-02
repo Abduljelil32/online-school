@@ -1,0 +1,61 @@
+<!DOCTYPE  HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en" [COLOR="Red"]viewsource="no"[/COLOR]>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= courseDet.Name %></title>
+</head>
+<body>
+    <% if (studentCSR.Verified==true) { %>
+        <header>
+            <h2>Lincoln</h2>
+            <div>
+                <h4><%= user.Fname %> <%= user.Lname %> </h4>
+                <img src="<%= user.imgUrl %>" alt="<%= user.Fname %>" width="200px" height="200px" style="border-radius: 100px">
+                <a href="/logout">Logout</a>
+            </div>
+
+
+        </header>
+
+        <section>
+            <h1><u>Videos</u></h1>
+            <% if (allVideo.length>0) { %>
+                <% allVideo.forEach(vid => { %>
+                 <article>
+                    <video width="320" height="240" controls>
+                        <source src="<%= vid.Video %>" type="video/mp4">
+                    </video>
+                    <caption><%= vid.Name %></caption>
+                 </article>
+                <% }) %>
+            <% } else { %>
+             <center><h3>No video Available</h3></center>
+            <% } %>
+            
+        </section>
+
+        <section>
+            <h1><u>Notes</u></h1>
+            <% if (allnotes.length>0) { %>
+                <% allnotes.forEach(vid => { %>
+                 <article>
+                    <p><%= vid.Name  %> </p>
+                    <a href="<%= vid.Note %> ">Download</a>
+                </article>
+                <% }) %>
+            <% } else { %>
+             <center><h3>No Notes Available</h3></center>
+            <% } %>
+            
+        </section>
+    <% } else { %>
+     <center>
+        <h2>Good day <%= user.Fname %> <%= user.Lname %>, your course is being proccessed</h2>
+     </center>
+    <% } %>
+    
+
+</body>
+</html>

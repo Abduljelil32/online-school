@@ -54,6 +54,8 @@ app.use('/student/edit', require('./router/student/editdetails'))// student home
 
 app.use('/regcourse', require('./router/student/course/addCourse'))// student home
 
+app.use('/student/course', require('./router/student/course/home'))// student home
+
 //Admin routes
 app.use('/adminLogin', require('./router/school/login')) // admin login
 
