@@ -40,6 +40,7 @@ mongoose.connect(process.env.mongolink,{useUnifiedTopology:true,useNewUrlParser:
 
 app.set('view engine', 'ejs')
 
+app.use(express.static('public'))
 
 ////////////////////////////////////////////student////////////////////////////////////////////////////
 app.use('/', require('./router/student/home'))// student home
