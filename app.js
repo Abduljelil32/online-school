@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 3000
+const port = 5001
 
 //dotenv
 require('dotenv').config()
@@ -40,6 +40,7 @@ mongoose.connect(process.env.mongolink,{useUnifiedTopology:true,useNewUrlParser:
 
 app.set('view engine', 'ejs')
 
+app.use(express.static('public'))
 
 ////////////////////////////////////////////student////////////////////////////////////////////////////
 app.use('/', require('./router/student/home'))// student home

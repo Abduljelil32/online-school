@@ -14,3 +14,6 @@ var shortUrl = require("node-url-shortener");
  shortUrl.short("https://res.cloudinary.com/solutech11/image/upload/v1664549637/ulvxpuyvxjcsedr8b8my.jpg", function (err, url) {
     console.log(url);
 });
+console.log('something');
+
+console.log('rand')
