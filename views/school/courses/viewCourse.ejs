@@ -18,6 +18,31 @@
         <input type="submit" value="Add Videos">
     </form>
 
-    <h1>Students Offering this Course</h1>
+    <h1>Students Registered Under this Course</h1>
+    <div class="Students">
+        <% if (data.length > 0) { %>
+            <table>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Phone Number</th>
+                    <th>Actions</th>
+                </tr>
+                <% data.forEach(Detail => { %>
+                    <tr>
+                        <td><%= Detail.Fname %></td>
+                        <td><%= Detail.Lname %></td>
+                        <td><%= Detail.PhnNo %></td>
+                        <td>
+                            <a href="/student/<%= Detail._id %>">View</a>
+                        </td>
+                    </tr>
+                    
+                <% }) %>
+            </table>
+        <% } else { %>
+            <p>There are no Registered Students for this Course</p>
+        <% } %>
+    </div>
 </body>
 </html>

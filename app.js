@@ -68,3 +68,7 @@ app.use('/deleteCourse', require('./router/school/courses/deleteCourse')) // Cou
 app.use('/viewCourse', require('./router/school/courses/viewCourse')) // View Course Details
 
 app.use('/addNote', require('./router/school/courses/notes/addNote')) // Create New Note
+
+app.use('/student', require('./router/school/students/student')) // View Student
+
+app.use('/approve', require('./router/school/students/approve')) // Confirm Payment
