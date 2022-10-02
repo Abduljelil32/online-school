@@ -21,19 +21,20 @@
     <!--===============================================================================================-->	
         <link rel="stylesheet" type="text/css" href="/vendor/daterangepicker/daterangepicker.css">
     <!--===============================================================================================-->
-        <link rel="stylesheet" type="text/css" href="/css/util.css">
+        <link href="/dist/output.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/public/css/util.css">
         <link rel="stylesheet" type="text/css" href="/css/main.css">
+        <link rel="stylesheet" type="text/css" href="/public/css/tailwind.css">
+
     <!--===============================================================================================-->
     <title>Register</title>
 </head>
 <body>
 
-    <p><%= msg %> </p>
-
     <div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
-
+                <p style="text-align: center;"><%= msg %> </p>
                 <form action="/register" method="post" enctype="multipart/form-data" class="login100-form validate-form p-l-55 p-r-55 p-t-178">
 
                     <span class="login100-form-title">
@@ -41,21 +42,36 @@
 					</span>
 
                     <div class="wrap-input100 validate-input m-b-16" data-validate="Please enter username">
-						<input class="input100" type="text" name="username" placeholder="Username">
+						<input class="input100" type="email" name="Email" placeholder="Email" id="">
 						<span class="focus-input100"></span>
 					</div>
-                    <input type="email" name="Email" placeholder="Email" id="">
                     <br><br>
-                    <input type="password" name="Pass" placeholder="Password" id="">
+
+                    <div class="wrap-input100 validate-input" data-validate = "Please enter password">
+						<input class="input100" type="password" name="Pass" placeholder="Password" id="">
+						<span class="focus-input100"></span>
+					</div>
                     <br><br>
                     <hr>
-                    <input type="text" name="FName" placeholder="First Name" id="">
+                    <div class="wrap-input100 validate-input" data-validate = "Please enter first name">
+						<input class="input100" type="text" name="FName" placeholder="First Name" id="">
+						<span class="focus-input100"></span>
+					</div>
                     <br><br>
-                    <input type="text" name="LName" placeholder="Last Name" id="">
+                    <div class="wrap-input100 validate-input" data-validate = "Please enter last name">
+						<input class="input100" type="text" name="LName" placeholder="Last Name" id="">
+						<span class="focus-input100"></span>
+					</div>
                     <br><br>
-                    <input type="tel" name="PhoneNo" placeholder="Phone No" id="">
+                    <div class="wrap-input100 validate-input" data-validate = "Please enter phone number">
+						<input class="input100" type="tel" name="PhoneNo" placeholder="Phone No" id="">
+						<span class="focus-input100"></span>
+					</div>
                     <br><br>
-                    <input type="file" name="image" accept="image/*" id="">
+                    <div class="wrap-input100 validate-input" data-validate = "Please enter phone number">
+						<input class="input100" type="file" name="image" id="" accept="image/*">
+						<span class="focus-input100"></span>
+					</div>
                     <br><br>
                     <button type="submit">Register</button>
                     <a href="/login">Login</a>
