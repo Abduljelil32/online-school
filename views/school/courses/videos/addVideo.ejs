@@ -4,14 +4,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Note</title>
+    <title>Add Video</title>
 </head>
 <body>
-    <h1>Add New Note</h1>
+    <h1>Add New Video</h1>
     <p style="color: red;"><%= msg %></p>
 
-
-    <form action="/addNote" method="POST" enctype="multipart/form-data">
+    <form action="/addVideo" method="post" enctype="multipart/form-data">
         <label for="crsID">Course: </label>
         <% if (courses.length > 0) { %>
             <select name="crsID" id="crsID">
@@ -25,13 +24,13 @@
             </select>
         <% } %>
         <br>
-        <label for="Name">Note Title:</label>
+        <label for="Name">Video Title: </label>
         <input type="text" name="Name" id="Name">
         <br>
-        <label for="Note">Note File:</label>
-        <input type="file" name="Note" id="Note">
+        <label for="Video">Video File: </label>
+        <input type="file" name="Video" id="Video">
         <br>
-        <input type="submit" value="Add Note">
+        <input type="submit" value="Add Video">
     </form>
 </body>
 </html>

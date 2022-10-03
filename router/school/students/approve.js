@@ -57,4 +57,43 @@ router.get('/:stdID', async (req, res, next) => {
     })
 })
 
+router.get('/:stdID/decline', async (req, res, next) => {
+    const id = req.params.stdID
+    console.log(id)
+    const locate = await studentCourseMod.findOne({ stdID: id })
+    console.log(locate)
+    const him = await studentDetMod.findOne({ stdID: id })
+
+    const userEmail = him.stdID
+    const hisID = him._id
+    console.log(hisID)
+    studentCourseMod.findOneAndUpdate({ stdID: id }, { stdID: locate.stdID, crsID: locate.crsID, RecieptIMG: locate.RecieptIMG, publicID: locate.publicID, Verified: "false", AmountPaid: locate.AmountPaid }, (err, docs) => {
+        if (err) {
+            console.log(err)
+            next(err)
+        } else {
+            sendEmail = async () => {
+                console.log("Payment Confirmed")
+                const user = await studentMod.findById({ _id: userEmail })
+                console.log(user.Email)
+                if (user) {
+                    const mailoption = {
+                        from: `${process.env.schoolName} <${process.env.email}>`,
+                        to: user.Email,
+                        subject: `Hello ${him.Fname} ${him.Lname}`,
+                        html: `<body>
+                        <center><h1>Your Payment Has been Declined</h1></center>
+                        </body>`
+                    }
+                    await myemail.sendMail(mailoption)
+                    res.redirect(`/student/${hisID}`)
+                } else {
+                    console.log("No user Available")
+                }
+            }
+            sendEmail()
+        }
+    })
+})
+
 module.exports = router
