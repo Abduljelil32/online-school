@@ -6,6 +6,7 @@ const courseMod = require('./../../../../model/school/course')
 const videoMod = require('./../../../../model/school/video')
 
 const cloudinary = require('cloudinary')
+const upload = require('./../../../../utils/multer')
 
 router.get('/', async (req, res) => {
     const courses = await courseMod.find()
@@ -13,27 +14,23 @@ router.get('/', async (req, res) => {
     res.render("school/courses/videos/addVideo", { courses, msg: '' })
 })
 
-router.post('/', async (req, res) => {
+router.post('/', upload.single('Video'), async (req, res) => {
     try {
         const courses = await courseMod.find()
         console.log(courses)
         console.log(req.body)
-        console.log(req.files)
         if (req.body.crsID != null && req.body.Name != null) {
-            const video = req.files.Video
-            if (video.mimetype == 'video/mp4') {
-                const upload = await cloudinary.v2.uploader.upload(video.tempFilePath, { resource_type: 'video ', folder: process.env.courseVideo, use_filename: false, unique_filename:true })
+                const result = await cloudinary.v2.uploader.upload(req.file.path, {
+                    resource_type: "video"
+                })
                 const addVideo = new videoMod({
                     crsID: req.body.crsID,
                     Name: req.body.Name,
-                    Video: upload.secure_url,
-                    PublicID: upload.public_id
+                    Video: result.secure_url,
+                    PublicID: result.public_id
                 })
                 await addVideo.save()
                 res.redirect(`/viewCourse/${req.body.crsID}`)
-            } else {
-                res.render('school/courses/videos/addNote', { courses, msg: 'Invalid File Type'})
-            }
         } else {
             res.render('school/courses/videos/addNote', { courses, msg: 'Fill all the Fields'})
         }

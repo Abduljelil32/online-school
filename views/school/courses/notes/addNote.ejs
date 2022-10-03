@@ -5,11 +5,62 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add Note</title>
+    <style>
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  transition: opacity 500ms;
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 30%;
+  position: relative;
+  transition: all 5s ease-in-out;
+}
+
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 200ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #06D85F;
+}
+.popup .content {
+  max-height: 30%;
+  overflow: auto;
+}
+    </style>
 </head>
 <body>
     <h1>Add New Note</h1>
     <p style="color: red;"><%= msg %></p>
 
+    <a href="#popup1">Add Cover</a>
 
     <form action="/addNote" method="POST" enctype="multipart/form-data">
         <label for="crsID">Course: </label>
@@ -25,13 +76,29 @@
             </select>
         <% } %>
         <br>
-        <label for="Name">Note Title:</label>
+        <label for="Name">Note Title: </label>
         <input type="text" name="Name" id="Name">
         <br>
-        <label for="Note">Note File:</label>
+        <label for="Note">Note File: </label>
         <input type="file" name="Note" id="Note">
         <br>
         <input type="submit" value="Add Note">
     </form>
+
+    <div id="popup1" class="overlay">
+        <div class="popup">
+            <h2>Add Note Cover</h2>
+            <a class="close" href="">&times;</a>
+            <div class="content">
+                <form action="/addNote/Cover" method="POST" enctype="multipart/form-data">
+                    <label for="Cover">Note Cover: </label>
+                    <input type="file" name="Cover" id="Note">
+                    <br>
+                    <br>
+                    <input type="submit" value="Add Cover">
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -17,6 +17,9 @@ const Notes = new Schema({
         type:String,
         
     },
+    Cover: {
+        type: String,
+    },
     PublicID:{
         required:true,
         type:String, 

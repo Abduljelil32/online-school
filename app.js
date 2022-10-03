@@ -20,6 +20,8 @@ cloudinary.config({
 //morgan
 app.use(require('morgan')('dev'))
 
+app.use('/addVideo', require('./router/school/courses/videos/addVideo')) // Create New Video
+
 //express fileupload
 app.use(require('express-fileupload')({useTempFiles:true}))
 
@@ -71,8 +73,6 @@ app.use('/deleteCourse', require('./router/school/courses/deleteCourse')) // Cou
 app.use('/viewCourse', require('./router/school/courses/viewCourse')) // View Course Details
 
 app.use('/addNote', require('./router/school/courses/notes/addNote')) // Create New Note
-
-app.use('/addVideo', require('./router/school/courses/videos/addVideo'))
 
 app.use('/student', require('./router/school/students/student')) // View Student
 

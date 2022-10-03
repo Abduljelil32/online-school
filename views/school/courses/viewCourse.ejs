@@ -51,6 +51,7 @@
                     <% if (note.crsID == 0) { %>
                         <p>There are no Notes for This Course</p>
                     <% } else if (note.crsID == course._id){ %>
+                        <img src="<%= note.Cover %>" alt="No Cover" width="300px" height="100%">
                         <a href="<%= note.Note %>">View Note</a>
                         <p><%= note.Name %></p>
                     <% } %>
