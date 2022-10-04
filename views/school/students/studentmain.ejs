@@ -7,10 +7,12 @@
     <title>Home</title>
 </head>
 <body>
+    <button onclick="history.back()">Go Back</button>
     <header>
         <h2>Lincoln</h2>
         <div>
-            <h4><%= student.Fname %> <%= student.Lname %> </h4>
+            <h4>FullName: <%= student.Fname %> <%= student.Lname %> </h4>
+            <h5>Email: <%= studentEmail.Email %></h5>
             <img src="<%= student.imgUrl %>" alt="<%= student.Fname %>" width="200px" height="200px" style="border-radius: 100px">
         </div>
     </header>
