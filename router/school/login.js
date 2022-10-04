@@ -11,8 +11,8 @@ router.get('/', (req, res) => {
 
 router.post('/', async(req, res) => {
     const sess = req.session
-    const adminEmail = "lincoln@gmail.com"
-    const adminPassword = "meAndyOu"
+    const adminEmail = process.env.admin
+    const adminPassword = process.env.password
     const email = req.body.email
     const password = req.body.password
     const courses = await courseMod.find()

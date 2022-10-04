@@ -7,6 +7,7 @@ const stdCRSMod = require('./../../../model/StdCRS')
 const studentDetMod = require('./../../..//model/Student/student_Det')
 const noteMod = require('./../../../model/school/Notes')
 const videoMod = require('./../../../model/school/video')
+const Notes = require('./../../../model/school/Notes')
 
 router.get('/:id', async (req, res, next) => {
     const sess = req.session

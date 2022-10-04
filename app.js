@@ -81,6 +81,10 @@ app.use('/approve', require('./router/school/students/approve')) // Confirm Paym
 
 app.use('/deleteStudent', require('./router/school/students/delete')) // Delete Student
 
+app.use('/deleteNote', require('./router/school/courses/notes/deleteNote')) // Delete Note
+
+app.use('/deleteVideo', require('./router/school/courses/videos/deleteVideo')) // Delete Video
+
 // Global 404 Page
 app.use(function (req, res) {
     res.status(404).render('404')

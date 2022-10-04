@@ -31,6 +31,10 @@ router.get('/:id', async (req, res, next) => {
                                     console.log(err)
                                     next(err)
                                 } else {
+
+                                    array.forEach(element => {
+                                        
+                                    });
                                     console.log("Deleted Succesfully")
                                     res.redirect('/admin/dashboard')
                                 }
