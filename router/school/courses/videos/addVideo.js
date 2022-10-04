@@ -9,7 +9,7 @@ const cloudinary = require('cloudinary')
 const upload = require('./../../../../utils/multer')
 
 router.get('/', async (req, res) => {
-    const sess= req.session
+    const sess = req.session
     if (sess.email && sess.password) {
         const courses = await courseMod.find()
         console.log(courses)

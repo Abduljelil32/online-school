@@ -20,7 +20,9 @@
 
     <h1>Students Registered Under this Course</h1>
     <div class="Students">
-        <% if (data.length > 0) { %>
+        <% if (data == 'undefined' || data == null) { %>
+            <p>There are no Registered Students for this Course</p>
+        <% } else if (data.length > 0) { %>
             <table>
                 <tr>
                     <th>First Name</th>
@@ -65,10 +67,10 @@
         <div>
             <% if (videos.length > 0) { %>
                 <% videos.forEach(video => { %>
-                    <% if (video.crsID != course._id) { %>
-                        <p>There are no Notes for This Course</p>
-                    <% } else { %>
-                        <video width="300px" height="100%" controls id="video">
+                    <% if (video.crsID == 0) { %>
+                        <p>There are no Videos for This Course</p>
+                    <% } else if (video.crsID == course._id) { %>
+                        <video width="300px" height="300px" controls id="video">
                             <source src="<%= video.Video %>" type="video/mp4" style="width: 100%; height: 100%; object-fit: cover;">
                         </video>
                         <p><%= video.Name %></p>

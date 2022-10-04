@@ -20,13 +20,14 @@ cloudinary.config({
 //morgan
 app.use(require('morgan')('dev'))
 
+//express session
+app.use(require('express-session')({secret:process.env.secret, resave:true, saveUninitialized:true, cookie:{expires:2678400000}}))
+
 app.use('/addVideo', require('./router/school/courses/videos/addVideo')) // Create New Video
 
 //express fileupload
 app.use(require('express-fileupload')({useTempFiles:true}))
 
-//express session
-app.use(require('express-session')({secret:process.env.secret, resave:true, saveUninitialized:true, cookie:{expires:2678400000}}))
 
 //mongoose
 const mongoose= require('mongoose')
@@ -77,6 +78,8 @@ app.use('/addNote', require('./router/school/courses/notes/addNote')) // Create 
 app.use('/student', require('./router/school/students/student')) // View Student
 
 app.use('/approve', require('./router/school/students/approve')) // Confirm Payment
+
+app.use('/deleteStudent', require('./router/school/students/delete')) // Delete Student
 
 // Global 404 Page
 app.use(function (req, res) {

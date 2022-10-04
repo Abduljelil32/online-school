@@ -3,6 +3,7 @@ const express = require('express')
 const router = express.Router()
 
 const courseMod = require('./../../model/school/course')
+const studentDetMod = require('./../../model/Student/student_Det')
 
 router.get('/', (req, res) => {
     res.render('school/login', { emailMsg: '', passwordMsg: '', msg: '' })
@@ -15,6 +16,7 @@ router.post('/', async(req, res) => {
     const email = req.body.email
     const password = req.body.password
     const courses = await courseMod.find()
+    const students = await studentDetMod.find()
     if (email != adminEmail && password != adminPassword) {
         res.render('school/login', { emailMsg: '', passwordMsg: '' , msg: 'Incorrect Email and Password'})
     } else if (password != adminPassword) {
@@ -25,7 +27,7 @@ router.post('/', async(req, res) => {
         sess.email = email
         sess.password = password
         console.log(sess)
-        res.render('school/dashboard', { courses })
+        res.render('school/dashboard', { courses, students })
     }
 })
 

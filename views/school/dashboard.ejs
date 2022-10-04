@@ -13,6 +13,8 @@
         <input type="submit" value="Create Course">
     </form>
 
+    <h1>Courses</h1>
+
     <div class="courses">
         <% if (courses.length > 0) { %>
             <table>
@@ -37,6 +39,32 @@
             </table>
         <% } else { %>
             <p>There are no Courses</p>
+        <% } %>
+    </div>
+
+    <h1>Students</h1>
+
+    <div>
+        <% if (students.length > 0) { %>
+            <table>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Phone Number</th>
+                    <th>Actions</th>
+                </tr>
+                <% students.forEach(student => { %>
+                    <tr>
+                        <td><%= student.Fname %> <%= student.Lname %></td>
+                        <td><%= student.PhnNo %></td>
+                        <td>
+                            <a href="/student/<%= student._id %>/main">View</a>
+                            <a href="/deleteStudent/<%= student._id %>">Delete</a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </table>
+        <% } else { %>
+            <p>There are no Students</p>
         <% } %>
     </div>
 </body>
