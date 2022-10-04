@@ -26,7 +26,7 @@ router.post('/', async(req, res) => {
     } else {
         sess.email = email
         sess.password = password
-        console.log(sess)
+        // console.log(sess)
         res.render('school/dashboard', { courses, students })
     }
 })

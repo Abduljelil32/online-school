@@ -27,7 +27,7 @@ router.get('/:id', async (req, res, next) => {
             // console.log(students[i])
             const dem = studentID.push(students[i].stdID)
         }
-        console.log(studentID)
+        // console.log(studentID)
     
     
         const data = []
@@ -37,7 +37,7 @@ router.get('/:id', async (req, res, next) => {
             // console.log(studentDetails[0])
             const info = data.push(studentDetails[0])
         }
-        console.log(data)
+        // console.log(data)
     
         res.render('school/courses/viewCourse', { course, data, notes, videos })
         

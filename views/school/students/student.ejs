@@ -17,26 +17,23 @@
     </header>
     <div>
         <!-- <img src="https://res.cloudinary.com/solutech11/image/upload/v1664676914/lincolnPortal/courses/reciept/kej5j4stbhq7noypyscr.jpg" alt=""> -->
-        <img src="<%= verify[0].RecieptIMG %>" alt="Receipt" width="300px" height="400px" style="border-radius: 10px">
-        <% if (verify[0].Verified == false ) { %>
-            <p id="first"><b>Payment Status: </b><i style="color: red;">Pending</i></p>
+        <% if (verify[0].RecieptIMG != null){ %>
+            <img src="<%= verify[0].RecieptIMG %>" alt="Receipt" width="300px" height="400px" style="border-radius: 10px">
+            <% if (verify[0].Verified == false ) { %>
+                <p id="first"><b>Payment Status: </b><i style="color: red;">Pending</i></p>
+            <% } else { %>
+                <p><b>Payment Status: </b><i style="color: green;">Approved</i></p>
+            <% } %>
+            <p id="second" style="display: none;"><b>Payment Status: </b><i style="color: red;">DECLINED</i></p>
+        </div>
+        <form action="/approve/<%= verify[0].stdID %>">
+            <input type="submit" value="Confirm Payment">
+        </form>
+        <form action="/approve/<%= verify[0].stdID %>/decline">
+            <input type="submit" value="Decline Payment">
+        </form>
         <% } else { %>
-            <p><b>Payment Status: </b><i style="color: green;">Approved</i></p>
+            <p style="color: red;">PAYMENT WAS DECLINED</p>
         <% } %>
-        <p id="second" style="display: none;"><b>Payment Status: </b><i style="color: red;">DECLINED</i></p>
-    </div>
-    <form action="/approve/<%= verify[0].stdID %>">
-        <input type="submit" value="Confirm Payment">
-    </form>
-    <form action="/approve/<%= verify[0].stdID %>/decline">
-        <input type="submit" value="Decline Payment" onclick="decline()">
-    </form>
-
-    <script>
-        decline = () => {
-            document.getElementById("second").style.display = "block"
-            document.getElementById("first").style.display = "none"
-        }
-    </script>
 </body>
 </html>

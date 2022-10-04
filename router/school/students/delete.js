@@ -14,15 +14,15 @@ router.get('/:id', async (req, res, next) => {
     if (sess.email && sess.password) {
         try {
             const studentDetail = await studentDetMod.findById({ _id: id })
-            console.log(studentDetail)
+            // console.log(studentDetail)
             const studentID = studentDetail.stdID
-            console.log(studentID)
+            // console.log(studentID)
             const student = await studentMod.findById({ _id: studentID })
-            console.log(student)
+            // console.log(student)
             const studentCourse = await courseMod.findOne({ stdID: studentID })
-            console.log(studentCourse)
+            // console.log(studentCourse)
             const studentAuth = await authMod.findOne({ stdID: studentID})
-            console.log(studentAuth)
+            // console.log(studentAuth)
             authMod.findOneAndDelete({ stdID: studentID }, (err, docs) => {
                 if (err) {
                     console.log(err)

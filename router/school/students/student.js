@@ -13,7 +13,7 @@ router.get('/:id', async (req, res) => {
         const student = await studentDetMod.findById({ _id: id })
         const stdID = student.stdID
         const verify = await studentCourseMod.find({ stdID: stdID })
-        // console.log(verify[0].RecieptIMG)
+        console.log(verify[0].RecieptIMG)
         res.render("school/students/student", { student, verify })
     } else {
         res.redirect('/admin')
@@ -28,7 +28,7 @@ router.get('/:id/main', async (req, res) => {
         const stdID = student.stdID
         const verify = await studentCourseMod.find({ stdID: stdID })
         const studentEmail = await studentMod.findById({ _id: stdID })
-        console.log(studentEmail)
+        // console.log(studentEmail)
         // console.log(verify[0].RecieptIMG)
         res.render("school/students/studentMain", { student, verify, studentEmail })
     } else {

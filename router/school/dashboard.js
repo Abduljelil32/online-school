@@ -19,8 +19,8 @@ router.get('/dashboard', async (req, res) => {
     if (sess.email && sess.password) {
         const courses = await courseMod.find()
         const students = await studentDetMod.find()
-        console.log(courses) 
-        console.log(students)
+        // console.log(courses) 
+        // console.log(students)
         res.render('school/dashboard', { courses, students })
     } else {
         res.redirect('/admin')

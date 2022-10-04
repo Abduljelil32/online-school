@@ -8,7 +8,7 @@ router.get('/:id', (req, res, next) => {
     const sess = req.session
     if (sess.email && sess.password) {
         const id = req.params.id
-        console.log(id)
+        // console.log(id)
         courseMod.findOneAndUpdate({ _id: id }, req.body, { new:true }, (err, docs) => {
             if (err) {
                 console.log(err)
@@ -24,14 +24,14 @@ router.get('/:id', (req, res, next) => {
 
 router.post('/:id', (req, res, next) => {
     const id = req.params.id
-    console.log(id)
-    console.log(req.body)
+    // console.log(id)
+    // console.log(req.body)
     courseMod.findByIdAndUpdate({ _id: id }, { Name: req.body.courseName, CourseCode: req.body.courseCode, Price: req.body.price},  (err, docs) => {
         if (err) {
             console.log(err)
             next(err)
         } else {
-            console.log("Updated Succesfully")
+            // console.log("Updated Succesfully")
             res.redirect('/admin/dashboard')
         }
     })
