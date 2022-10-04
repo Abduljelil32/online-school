@@ -5,7 +5,12 @@ const router = express.Router()
 const courseMod = require('../../../model/school/course')
 
 router.get('/', (req, res) => {
-    res.render('school/courses/createCourse')
+    const sess= req.session
+    if (sess.email && sess.password) {
+        res.render('school/courses/createCourse')
+    } else {
+        res.redirect('adminLogin')
+    }
 })
 
 router.post('/', async(req, res) => {

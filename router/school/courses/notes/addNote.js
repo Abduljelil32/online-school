@@ -9,9 +9,14 @@ const noteMod = require('./../../../../model/school/Notes')
 const cloudinary = require('cloudinary')
 
 router.get('/', async (req, res) => {
-    const courses = await courseMod.find()
-    console.log(courses)
-    res.render('school/courses/notes/addNote',{ courses, msg: '' })
+    const sess= req.session
+    if (sess.email && sess.password) {
+        const courses = await courseMod.find()
+        console.log(courses)
+        res.render('school/courses/notes/addNote',{ courses, msg: '' })
+    } else {
+        res.redirect('adminLogin')
+    }
 })
 
 router.post('/', async (req, res) => {

@@ -9,6 +9,7 @@ router.get('/', (req, res) => {
 })
 
 router.post('/', async(req, res) => {
+    const sess = req.session
     const adminEmail = "lincoln@gmail.com"
     const adminPassword = "meAndyOu"
     const email = req.body.email
@@ -21,6 +22,9 @@ router.post('/', async(req, res) => {
     } else if (email != adminEmail) {
         res.render('school/login', { emailMsg: 'Incorrect Email', passwordMsg: '' , msg: '' })
     } else {
+        sess.email = email
+        sess.password = password
+        console.log(sess)
         res.render('school/dashboard', { courses })
     }
 })

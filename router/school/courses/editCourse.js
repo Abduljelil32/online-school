@@ -5,16 +5,21 @@ const router = express.Router()
 const courseMod = require('../../../model/school/course')
 
 router.get('/:id', (req, res, next) => {
-    const id = req.params.id
-    console.log(id)
-    courseMod.findOneAndUpdate({ _id: id }, req.body, { new:true }, (err, docs) => {
-        if (err) {
-            console.log(err)
-            next(err)
-        } else {
-            res.render('school/courses/editCourse', { course: docs })
-        }
-    })
+    const sess = req.session
+    if (sess.email && sess.password) {
+        const id = req.params.id
+        console.log(id)
+        courseMod.findOneAndUpdate({ _id: id }, req.body, { new:true }, (err, docs) => {
+            if (err) {
+                console.log(err)
+                next(err)
+            } else {
+                res.render('school/courses/editCourse', { course: docs })
+            }
+        })
+    } else {
+        res.redirect('adminLogin')
+    }
 })
 
 router.post('/:id', (req, res, next) => {
