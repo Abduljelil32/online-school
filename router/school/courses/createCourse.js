@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
     if (sess.email && sess.password) {
         res.render('school/courses/createCourse')
     } else {
-        res.redirect('adminLogin')
+        res.redirect('/admin')
     }
 })
 

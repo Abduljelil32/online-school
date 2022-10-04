@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
         console.log(courses)
         res.render('school/courses/notes/addNote',{ courses, msg: '' })
     } else {
-        res.redirect('adminLogin')
+        res.redirect('/admin')
     }
 })
 

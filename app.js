@@ -77,3 +77,8 @@ app.use('/addNote', require('./router/school/courses/notes/addNote')) // Create 
 app.use('/student', require('./router/school/students/student')) // View Student
 
 app.use('/approve', require('./router/school/students/approve')) // Confirm Payment
+
+// Global 404 Page
+app.use(function (req, res) {
+    res.status(404).render('404')
+})

@@ -20,7 +20,7 @@ router.get('/dashboard', async (req, res) => {
         console.log(courses) 
         res.render('school/dashboard', { courses })
     } else {
-        res.redirect('adminLogin')
+        res.redirect('/admin')
     }
 })
 

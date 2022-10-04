@@ -46,7 +46,7 @@ router.get('/:id', async (req, res, next) => {
         //     res.render('school/courses/viewCourse', { course })
         // }
     } else {
-        res.redirect('adminLogin')
+        res.redirect('/admin')
     }
 })
 

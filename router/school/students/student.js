@@ -15,7 +15,7 @@ router.get('/:id', async (req, res) => {
         // console.log(verify[0].RecieptIMG)
         res.render("school/students/student", { student, verify })
     } else {
-        res.redirect('adminLogin')
+        res.redirect('/admin')
     }
 })
 

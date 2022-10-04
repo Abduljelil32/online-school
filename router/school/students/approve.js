@@ -102,7 +102,7 @@ router.get('/:stdID/decline', async (req, res, next) => {
             }
         })
     } else {
-        res.redirect('adminLogin')
+        res.redirect('/admin')
     }
 })
 
