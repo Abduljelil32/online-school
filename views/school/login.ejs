@@ -5,11 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login as Admin</title>
+    <link rel="stylesheet" href="styles/style.css">
 </head>
-<body>
+<body class="bg-black">
     <p style="color: red;"><%= emailMsg %></p>
     <p style="color: red;"><%= passwordMsg %></p>
     <p style="color: red;"><%= msg %></p>
+    <h1>Login As Admin</h1>
     <form action="/adminLogin" method="POST">
         <label for="email">Email</label>
         <input type="email" name="email" id="email" placeholder="Enter your Email">
