@@ -69,8 +69,9 @@ router.post('/otp',async (req,res)=>{
                 if (user.verified==false) {
                     const authchk = await auth.findOne({stdID:user._id})
                     const det = await student_Det.findOne({stdID:user._id})
-                    if (collect.otp!=null) {
-                        if (collect.otp==authchk.OTP) {
+                    if (collect.otp!=null && collect.otp1!=null&& collect.otp2!=null&& collect.otp3!=null) {
+                        const otp = `${collect.otp}${collect.otp1}${collect.otp2}${collect.otp3}`
+                        if (otp==authchk.OTP) {
                             await student.updateOne({_id:user._id, Email:sess.student},{verified:true})
                             await auth.updateOne({stdID:user._id},{OTP:randToken.generate(4,'1234567890'), reset:randToken.generate(16,'1234567890qwertyuiopasdfghjklzxcvbnm$')})
                             const mailoption= {

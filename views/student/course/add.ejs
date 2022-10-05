@@ -2,31 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Karma">
     <title>Add Course</title>
-</head>
-<body>
-    <p><%= schoolAccount.nmbr %> <br> <%= schoolAccount.bank %> <br> <%= schoolAccount.Name %></p>
-    <p>state your name nd course Name in registration place</p>
-    <hr>
-    <p><%= msg %> </p>
-    <form action="/regcourse" method="post" enctype="multipart/form-data">
-        <% if (allCrs.length>0) { %>
-            <% allCrs.forEach(crs => { %>
-                <input type="radio" name="crse" value="<%= crs._id %>" id="">
-                <label for=""><%= crs.Name %> - <%= crs.CourseCode %> - <%= crs.Price %></label><br>
-            <% }) %>
-            <br>
-            <input type="number" placeholder="amount" name="Amount" id=""> 
-<br>
-            <label for="image"><u>reciept:</u></label>
-            <input type="file" name="image" id="">
-            
-            <button type="submit">Add</button>
-         <% } else { %>
-          <h3>no course</h3>
-        <% } %>
-    </form>
+    <style>
+    body,h1,h2,h3,h4,h5,h6 {font-family: "Karma", sans-serif}
+    .w3-bar-block .w3-bar-item {padding:20px}
+    </style>
+    </head>
+    <body>
+
+        <div class="w3-container w3-padding-64" id="contact">
+            <h1>School Account Details</h1><br>
+            <p> <b><%= schoolAccount.nmbr %></b></p>
+            <p class="w3-text-blue-grey w3-large"><b><%= schoolAccount.bank %></b></p>
+            <p><%= schoolAccount.Name %></p>
+            <p style="text-align: center; font-weight: bold;"><%= msg %> </p>
+            <form action="/regcourse"  method="post" enctype="multipart/form-data">
+                <% if (allCrs.length>0) { %>
+                    <% allCrs.forEach(crs => { %>
+              <input class="w3-input"  type="checkbox" name="crse" value="<%= crs._id %>" id="" style="float: right;">
+              <label><span class="w3-pw3-padding-16adding-large"><b><%= crs.Name %> - <%= crs.CourseCode %>  </b> <span class="w3-tag" style="background-color: red;"><%= crs.Price %></span></span></label>
+              <% }) %>
+              <br>
+              <p><input class="w3-input w3-padding-16" type="number" placeholder="amount" required name="Amount"></p>
+              <br>
+              <label for="image">Add Reciept File</label>
+              <input type="file" name="image" id="">
+              <p><input class="w3-input w3-padding-16" type="datetime-local" placeholder="Date and time" required name="date" value="Date of Payment"></p>
+              <p><button class="w3-button w3-red w3-section" type="submit">Add</button></p>
+              <% } else { %>
+                <h3>no course</h3>
+              <% } %>
+            </form>
+          </div>
+
 </body>
 </html>
+
+
+
