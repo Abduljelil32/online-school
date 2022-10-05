@@ -100,15 +100,15 @@ router.get('/:stdID/decline', async (req, res, next) => {
                             const user = await studentMod.findById({ _id: userEmail })
                             // console.log(user.Email)
                             if (user) {
-                                // const mailoption = {
-                                //     from: `${process.env.schoolName} <${process.env.email}>`,
-                                //     to: user.Email,
-                                //     subject: `Hello ${him.Fname} ${him.Lname}`,
-                                //     html: `<body>
-                                //     <center><h1>Your Payment Has been Declined</h1></center>
-                                //     </body>`
-                                // }
-                                // await myemail.sendMail(mailoption)
+                                const mailoption = {
+                                    from: `${process.env.schoolName} <${process.env.email}>`,
+                                    to: user.Email,
+                                    subject: `Hello ${him.Fname} ${him.Lname}`,
+                                    html: `<body>
+                                    <center><h1>Your Payment Has been Declined</h1></center>
+                                    </body>`
+                                }
+                                await myemail.sendMail(mailoption)
                                 res.redirect(`/viewCourse/${locate.crsID}`)
                             } else {
                                 console.log("No user Available")
