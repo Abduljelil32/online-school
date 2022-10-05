@@ -27,7 +27,6 @@ router.get('/otp',async(req,res)=>{
                 if (user.verified==false) {
                     const det = await student_Det.findOne({stdID:user._id})
                     const otp= randToken.generate(4,'1234567890')
-                    console.log(otp)
                     const reset = randToken.generate(16,'1234567890qwertyuiopasdfghjklzxcvbnm$')
                     await auth.updateOne({stdID:user._id},{OTP:otp, reset})
                     const mailoption= {
