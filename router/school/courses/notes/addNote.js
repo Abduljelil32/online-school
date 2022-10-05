@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
             if (note.mimetype == 'application/pdf' || note.mimetype == 'application/msword') {
                 const upload = await cloudinary.v2.uploader.upload(note.tempFilePath, { resource_type: 'auto', folder: process.env.coursebook, use_filename: false, unique_filename:true })
                 const thisNote = await noteMod.findOne({ crsID: ' ' })
-                console.log(thisNote)
+                // console.log(thisNote)
                 const data = {
                     crsID: req.body.crsID,
                     Name: req.body.Name,
