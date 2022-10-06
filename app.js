@@ -86,6 +86,6 @@ app.use('/deleteNote', require('./router/school/courses/notes/deleteNote')) // D
 app.use('/deleteVideo', require('./router/school/courses/videos/deleteVideo')) // Delete Video
 
 // Global 404 Page
-app.use(function (req, res) {
+app.use((req, res)=>{
     res.status(404).render('404')
 })

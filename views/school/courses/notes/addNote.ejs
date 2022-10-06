@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Edit Course</title>
+    <title>Add Notes</title>
     <!--===============================================================================================-->
     <link rel="icon" type="image/png" href="/images/icons/favicon.ico" />
     <!--===============================================================================================-->
@@ -50,7 +50,7 @@
     <link href="/dist/output.css" rel="stylesheet" />
     <link rel="stylesheet" type="text/css" href="/css/util.css" />
     <link rel="stylesheet" type="text/css" href="/css/main.css" />
-    <link rel="stylesheet" type="text/css" href="/css/tailwind.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/tailwind.css" />
 
     <!--===============================================================================================-->
     <style>
@@ -146,7 +146,6 @@
               <% } else { %>
               <select name="crsID" id="crsID">
                 <option value="" disabled>No Available Course</option>
-<<<<<<< HEAD
               </select>
               <% } %>
             </div>
@@ -160,23 +159,11 @@
                 name="Name"
                 id="Name"
                 placeholder="Note Title"
+                accept="application/pdf"
               />
               <span class="focus-input100"></span>
             </div>
             <br /><br />
-=======
-            </select>
-        <% } %>
-        <br>
-        <label for="Name">Note Title: </label>
-        <input type="text" name="Name" id="Name" required>
-        <br>
-        <label for="Note">Note File: </label>
-        <input type="file" name="Note" id="Note" required>
-        <br>
-        <input type="submit" value="Add Note">
-    </form>
->>>>>>> 5ed44b02f97c1df105ae3b13d6a50c985b3c1dd4
 
             <div
               class="wrap-input100 validate-input"
@@ -186,7 +173,6 @@
                 type="file"
                 name="Note"
                 id="Note"
-                accept="application/pdf"
                 placeholder="Note File"
               />
               <span class="focus-input100"></span>
