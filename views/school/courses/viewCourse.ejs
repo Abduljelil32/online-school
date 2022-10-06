@@ -1,204 +1,358 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en" class="antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title><%= course.Name %></title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link
+      href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel=" stylesheet"
+    />
+    <!--Replace with your tailwind.css once created-->
+
+    <!--Regular Datatables CSS-->
+    <link
+      href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css"
+      rel="stylesheet"
+    />
+    <!--Responsive Extension Datatables CSS-->
+    <link
+      href="https://cdn.datatables.net/responsive/2.2.3/css/responsive.dataTables.min.css"
+      rel="stylesheet"
+    />
+
     <style>
-        #bookTitle{
-  margin-left: 45%;
-  font-size: 35px;
-  margin-top: 70px;
-  margin-bottom: 10px;
-}
+      /*Overrides for Tailwind CSS */
 
-#bookDes{
-  display: inline-block;
-}
+      /*Form fields*/
+      .dataTables_wrapper select,
+      .dataTables_wrapper .dataTables_filter input {
+        color: #4a5568;
+        /*text-gray-700*/
+        padding-left: 1rem;
+        /*pl-4*/
+        padding-right: 1rem;
+        /*pl-4*/
+        padding-top: 0.5rem;
+        /*pl-2*/
+        padding-bottom: 0.5rem;
+        /*pl-2*/
+        line-height: 1.25;
+        /*leading-tight*/
+        border-width: 2px;
+        /*border-2*/
+        border-radius: 0.25rem;
+        border-color: #edf2f7;
+        /*border-gray-200*/
+        background-color: #edf2f7;
+        /*bg-gray-200*/
+      }
 
-.bookDiv{
-  display: flex;
-  height: 350px;
-  width: auto;
-  /* background-color: blue; */
-  margin: 4px, 4px;
-  padding: 4px;
-  /* background-color: #08c708; */
-  overflow-x: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
-  /* width: 1000px; */
-}
+      /*Row Hover*/
+      table.dataTable.hover tbody tr:hover,
+      table.dataTable.display tbody tr:hover {
+        background-color: #ebf4ff;
+        /*bg-indigo-100*/
+      }
 
-.book{
-  width: 300px;
-  height: auto;
-  /* background-color: #2196F3; */
-  margin-bottom: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-  border-radius: 10px;
-  /* box-shadow: 0 0 25px 0 rgb(227, 227, 227), 0 20px 25px 0 rgba(0, 0, 0, 0.2); */
-}
+      /*Pagination Buttons*/
+      .dataTables_wrapper .dataTables_paginate .paginate_button {
+        font-weight: 700;
+        /*font-bold*/
+        border-radius: 0.25rem;
+        /*rounded*/
+        border: 1px solid transparent;
+        /*border border-transparent*/
+      }
 
-/* .book:hover {
-  box-shadow: 10px 10px 10px black;
-} */
+      /*Pagination Buttons - Current selected */
+      .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+        color: #fff !important;
+        /*text-white*/
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+          0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        /*shadow*/
+        font-weight: 700;
+        /*font-bold*/
+        border-radius: 0.25rem;
+        /*rounded*/
+        background: #667eea !important;
+        /*bg-indigo-500*/
+        border: 1px solid transparent;
+        /*border border-transparent*/
+      }
 
-/*  */
+      /*Pagination Buttons - Hover */
+      .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+        color: #fff !important;
+        /*text-white*/
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+          0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        /*shadow*/
+        font-weight: 700;
+        /*font-bold*/
+        border-radius: 0.25rem;
+        /*rounded*/
+        background: #667eea !important;
+        /*bg-indigo-500*/
+        border: 1px solid transparent;
+        /*border border-transparent*/
+      }
 
-.card-body:hover img{
-  filter: blur(2px) brightness(60%);
-  box-shadow: 0 0 16px rgb(105, 108, 108);
-}
+      /*Add padding to bottom border */
+      table.dataTable.no-footer {
+        border-bottom: 1px solid #e2e8f0;
+        /*border-b-1 border-gray-300*/
+        margin-top: 0.75em;
+        margin-bottom: 0.75em;
+      }
 
-.card-body :not(img){
-  position: absolute;
-  /* z-index: -1; */
-  top: 30%;
-  width: 100%;
-  text-align: center;
-  color: #fff;
-  opacity: 0;
-  transition: .3s;
-}
-
-.card-body h5{
-  top: 50%;
-  right: 50%;
-}
-
-.card-body:hover :not(img){
-  opacity: 1;
-}
-
-/*  */
-
-#videoTitle{
-  margin-left: 45%;
-  font-size: 35px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.videoDiv{
-  display: flex;
-  height: 350px;
-  width: auto;
-  /* background-color: blue; */
-  margin: 4px, 4px;
-  padding: 4px;
-  /* background-color: #08c708; */
-  overflow-x: auto;
-  overflow-y: hidden;
-  white-space: nowrap;
-  /* width: 1000px; */
-}
-
-.video{
-  width: 300px;
-  height: auto;
-  /* background-color: #2196F3; */
-  margin-bottom: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-  border-radius: 10px;
-  box-shadow: 0 0 25px 0 rgb(227, 227, 227), 0 20px 25px 0 rgba(0, 0, 0, 0.2);
-}
+      /*Change colour of responsive icon*/
+      table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before,
+      table.dataTable.dtr-inline.collapsed
+        > tbody
+        > tr
+        > th:first-child:before {
+        background-color: #667eea !important;
+        /*bg-indigo-500*/
+      }
     </style>
-</head>
-<body>
-    <button onclick="history.back()">Go Back</button>
-    <form action="/admin/dashboard">
-        <input type="submit" value="Dashboard">
-    </form>
-    <form action="/admin/dashboard">
-        <input type="submit" value="Dashboard">
-    </form>
-    <h1>Course Name: <i><%= course.Name %></i></h1>
-    <h2>Course Code: <i><%= course.CourseCode %></i></h2>
-    <h4>Course Price: <i><%= course.Price %></i></h4>
+  </head>
 
-    <form action="/addNote">
-        <input type="submit" value="Add Notes">
-    </form>
-    <form action="/addVideo">
-        <input type="submit" value="Add Videos">
-    </form>
+  <body class="leading-normal tracking-wider text-gray-900 bg-gray-100">
+    <!--Container-->
+    <div class="container w-full px-2 mx-auto md:w-4/5 xl:w-3/5">
+      <h1 style="text-align: center; padding: 20px; font-size: 50px">
+        Admin DashBoard
+      </h1>
+      <!--Title-->
+      <h1
+        class="flex items-center px-2 py-8 font-sans text-xl font-bold text-red-500 break-normal md:text-2xl"
+      >
+        Courses Details
+      </h1>
 
-    <h1>Students Registered Under this Course</h1>
-    <div class="Students">
+      <form action="/createCourse">
+        <input type="submit" value="Create Course" />
+      </form>
+
+      <!--Card-->
+      <div id="recipients" class="p-8 mt-6 bg-white rounded shadow lg:mt-0">
+        <table
+          id="example"
+          class="stripe hover"
+          style="width: 100%; padding-top: 1em; padding-bottom: 1em"
+        >
+          <thead>
+            <tr>
+              <th data-priority="1">Course Name</th>
+              <th data-priority="2">Course Code</th>
+              <th data-priority="3">Course Price</th>
+              <th data-priority="4">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><%= course.Name %></td>
+              <td><%= course.CourseCode %></td>
+              <td><%= course.Price %></td>
+              <td>
+                <a href="/addNote">Add Note ||</a>
+                <a href="/addVideo" style="color: blue">
+                  Add Video <span style="color: black">||</span></a
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!--/Card-->
+    </div>
+    <!--/container-->
+
+    <!--Container 2-->
+    <div class="container w-full px-2 mx-auto md:w-4/5 xl:w-3/5">
+      <!--Title-->
+      <h1
+        class="flex items-center px-2 py-8 font-sans text-xl font-bold text-red-500 break-normal md:text-2xl"
+      >
+        Students registered under this course
+      </h1>
+
+      <!--Card-->
+      <div id="recipients" class="p-8 mt-6 bg-white rounded shadow lg:mt-0">
         <% if (data == 'undefined' || data == null) { %>
-            <p>There are no Registered Students for this Course</p>
+        <p>There are no Registered Students for this Course</p>
         <% } else if (data.length > 0) { %>
-            <table>
-                <tr>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Phone Number</th>
-                    <th>Actions</th>
-                </tr>
-                <% data.forEach(Detail => { %>
-                    <tr>
-                        <td><%= Detail.Fname %></td>
-                        <td><%= Detail.Lname %></td>
-                        <td><%= Detail.PhnNo %></td>
-                        <td>
-                            <a href="/student/<%= Detail._id %>">View</a>
-                        </td>
-                    </tr>
-                    
-                <% }) %>
-            </table>
+        <table
+          id="example"
+          class="stripe hover"
+          style="width: 100%; padding-top: 1em; padding-bottom: 1em"
+        >
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Phone Number</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% data.forEach(Detail => { %>
+            <tr>
+              <td><%= Detail.Fname %></td>
+              <td><%= Detail.Lname %></td>
+              <td><%= Detail.PhnNo %></td>
+              <td>
+                <a href="/student/<%= Detail._id %>">View</a>
+              </td>
+            </tr>
+
+            <% }) %>
+          </tbody>
+        </table>
         <% } else { %>
             <p>There are no Registered Students for this Course</p>
-        <% } %>
-
-        <h1 id="bookTitle">Notes</h1>
-        <div class="bookDiv">
-            <% if (notes.length > 0) { %>
-                <% notes.forEach(note => { %>
-                    <div class="book">
-                        <% if (note.crsID == 0) { %>
-                            <p>There are no Notes for This Course</p>
-                        <% } else if (note.crsID == course._id){ %>
-                            <h4 style="padding-top: 10px;"><%= note.Name %></h4>
-                            <div  style="width: 100%; height: 70%; border-top-left-radius: 10%; border-top-right-radius: 10%; display: inline-block; position: relative; transition: .3s;" class="card-body" id="blur-in">
-                                <img src="<%= note.Cover %>" alt="<%= note.Name %>" width="300px" height="100%">
-                                <h5><a href="<%= note.Note %>" blank="false">ViewNote</a></h5>
-                            </div>
-                            <a href="/deleteNote/<%= note._id %>">Delete</a>
-                        <% } %>
-                    </div>
-                <% }) %>
-            <% } else { %>
-                <p>There is no Note</p>
             <% } %>
-        </div>
-        
-        <h1 id="videoTitle">Videos</h1>
-        <div class="videoDiv">
-            <% if (videos.length > 0) { %>
-                <% videos.forEach(video => { %>
-                    <div class="video">
-                        <% if (video.crsID == 0) { %>
-                            <p>There are no Videos for This Course</p>
-                        <% } else if (video.crsID == course._id) { %>
-                            <h4 style="padding-top: 10px;"><%= video.Name %></h4>
-                            <div style="width: 100%; height: 70%; border-top-left-radius: 10%; border-top-right-radius: 10%;">
-                                <video width="300px" height="100%" controls id="video">
-                                    <source src="<%= video.Video %>" type="video/mp4" style="width: 100%; height: 100%; object-fit: cover;">
-                                </video>
-                            </div>
-                            <a href="/deleteVideo/<%= video._id %>">Delete</a>
-                        <% } %>
-                    </div>
-                <% }) %>
-            <% } else { %>
-                <p>There is no Video</p>
-            <% } %>
-        </div>
+      </div>
+      <!--/Card-->
     </div>
-</body>
+    <!--/container-->
+
+
+     <!--Container 2-->
+     <div class="container w-full px-2 mx-auto md:w-4/5 xl:w-3/5">
+        <!--Title-->
+        <h1
+          class="flex items-center px-2 py-8 font-sans text-xl font-bold text-red-500 break-normal md:text-2xl"
+        >
+         Notes
+        </h1>
+  
+        <!--Card-->
+        <div id="recipients" class="p-8 mt-6 bg-white rounded shadow lg:mt-0">
+            <div class="bookDiv">
+              <% if (notes.length > 0) { %> <% notes.forEach(note => { %>
+              <div class="book">
+                <% if (note.crsID == 0) { %>
+                <p>There are no Notes for This Course</p>
+                <% } else if (note.crsID == course._id){ %>
+                <h4 style="padding-top: 10px; font-weight: bold;"><%= note.Name %></h4>
+                <div
+                  style="
+                    width: 100%;
+                    height: 70%;
+                    border-top-left-radius: 10%;
+                    border-top-right-radius: 10%;
+                    display: inline-block;
+                    position: relative;
+                    transition: 0.3s;
+                  "
+                  class="card-body"
+                  id="blur-in"
+                >
+                  <img
+                    src="<%= note.Cover %>"
+                    alt="<%= note.Name %>"
+                    width="300px"
+                    height="100%"
+                  />
+                  <a href="<%= note.Note %>" blank="false" style="color: blue;">View Note <span style="color: black;">||</span></a>
+                  <a href="/deleteNote/<%= note._id %>" style="color: red;">Delete</a>
+                </div>
+                
+                <% } %>
+              </div>
+              <% }) %> <% } else { %>
+              <p>There is no Note</p>
+              <% } %>
+            </div>
+        </div>
+        <!--/Card-->
+      </div>
+      <!--/container-->
+
+
+
+
+
+
+
+
+
+
+     <!--Container 2-->
+     <div class="container w-full px-2 mx-auto md:w-4/5 xl:w-3/5">
+        <!--Title-->
+        <h1
+          class="flex items-center px-2 py-8 font-sans text-xl font-bold text-red-500 break-normal md:text-2xl"
+        >
+         Videos
+        </h1>
+  
+        <!--Card-->
+        <div id="recipients" class="p-8 mt-6 bg-white rounded shadow lg:mt-0">
+            <div class="videoDiv">
+              <% if (videos.length > 0) { %> <% videos.forEach(video => { %>
+              <div class="video">
+                <% if (video.crsID == 0) { %>
+                <p>There are no Videos for This Course</p>
+                <% } else if (video.crsID == course._id) { %>
+                <h4 style="padding-top: 10px; font-weight: bold;"><%= video.Name %></h4>
+                <div
+                  style="
+                    width: 100%;
+                    height: 70%;
+                    border-top-left-radius: 10%;
+                    border-top-right-radius: 10%;
+                  "
+                >
+                  <video width="300px" height="100%" controls id="video">
+                    <source
+                      src="<%= video.Video %>"
+                      type="video/mp4"
+                      style="width: 100%; height: 100%; object-fit: cover"
+                    />
+                  </video>
+                </div>
+                <a href="/deleteVideo/<%= video._id %>" style="color: red;">Delete</a>
+                <% } %>
+              </div>
+              <% }) %> <% } else { %>
+              <p>There is no Video</p>
+              <% } %>
+            </div>
+          </div>
+        <!--/Card-->
+      </div>
+      <!--/container-->
+
+
+
+
+    
+
+    <!-- jQuery -->
+    <script
+      type="text/javascript"
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+    ></script>
+
+    <!--Datatables -->
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js"></script>
+    <script>
+      $(document).ready(function () {
+        var table = $("#example")
+          .DataTable({
+            responsive: true,
+          })
+          .columns.adjust()
+          .responsive.recalc();
+      });
+    </script>
+  </body>
 </html>

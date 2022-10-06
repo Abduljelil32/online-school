@@ -22,8 +22,8 @@
             <form action="/regcourse"  method="post" enctype="multipart/form-data">
                 <% if (allCrs.length>0) { %>
                     <% allCrs.forEach(crs => { %>
-              <input class="w3-input"  type="checkbox" name="crse" value="<%= crs._id %>" id="" style="float: right;">
-              <label><span class="w3-pw3-padding-16adding-large"><b><%= crs.Name %> - <%= crs.CourseCode %>  </b> <span class="w3-tag" style="background-color: red;"><%= crs.Price %></span></span></label>
+              <input class="w3-input"  type="radio" name="crse" value="<%= crs._id %>" id="" style="float: right;">
+              <label><span class="w3-pw3-padding-16adding-large"><b><%= crs.Name %> - <%= crs.CourseCode %>  </b> <span class="w3-tag" style="background-color: red;"><%= crs.Price %></span></span></label><br>
               <% }) %>
               <br>
               <p><input class="w3-input w3-padding-16" type="number" placeholder="amount" required name="Amount"></p>
