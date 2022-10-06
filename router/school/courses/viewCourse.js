@@ -16,8 +16,8 @@ router.get('/:id', async (req, res, next) => {
         // console.log(id)
         const course = await courseMod.findById({ _id: id })
         const students = await stdCRSMod.find({ crsID: id })
-        const notes = await noteMod.find()
-        const videos = await videoMod.find()
+        const notes = await noteMod.find({ crsID: id })
+        const videos = await videoMod.find({ crsID: id })
         // const students = await stdCRSMod.find({ crsID: "6335a80924c854196b0d1484" })
         // console.log(students)
     

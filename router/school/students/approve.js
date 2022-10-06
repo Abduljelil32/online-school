@@ -105,7 +105,7 @@ router.get('/:stdID/decline', async (req, res, next) => {
                                     to: user.Email,
                                     subject: `Hello ${him.Fname} ${him.Lname}`,
                                     html: `<body>
-                                    <center><h1>Your Payment Has been Declined</h1></center>
+                                    <center><h1>Your Payment Has been Declined Due to Invalid Payment Reciept</h1></br><p>Kindly Re-Register the Course and make a valid Payment for Approval. <b>Thank You</b></p></center>
                                     </body>`
                                 }
                                 await myemail.sendMail(mailoption)
