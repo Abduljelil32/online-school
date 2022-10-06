@@ -30,7 +30,7 @@ app.use(require('express-fileupload')({useTempFiles:true}))
 
 
 //mongoose
-const mongoose= require('mongoose')
+const mongoose= require('mongoose');
 mongoose.connect(process.env.mongolink,{useUnifiedTopology:true,useNewUrlParser:true}).then(res=>{
     if (res) {
         console.log('db connected');

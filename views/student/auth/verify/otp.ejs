@@ -1,16 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Otp</title>
-</head>
-<body>
-    <%= msg %> 
-    <form action="/v/otp" method="post">
-        <input type="number" name="otp" id="">
-        <button type="submit">Verify</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+     <!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="/images/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="/vendor/animate/animate.css">
+    <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href="/vendor/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="/vendor/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+        <link rel="stylesheet" type="text/css" href="/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->	
+        <link rel="stylesheet" type="text/css" href="/vendor/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+        <!-- <script src="https://cdn.tailwindcss.com"></script>
+        <link href="/dist/output.css" rel="stylesheet"> -->
+        <link rel="stylesheet" href="/otp.css">
+        <link rel="stylesheet" type="text/css" href="/css/util.css">
+        <link rel="stylesheet" type="text/css" href="/css/main.css">
+        <!-- <link rel="stylesheet" type="text/css" href="/public/css/tailwind.css"> -->
+
+    <!--===============================================================================================-->
+    <title>Otp Verification</title>
+  </head>
+  <body>
+    <%= msg %>
+    <div class="prompt">
+      Enter the code generated on your Email Address below to log in!
+    </div>
+    <form
+      action="/v/otp"
+      method="post"
+      class="digit-group"
+      data-group-name="digits"
+      data-autosubmit="false"
+      autocomplete="off"
+    >
+      <input type="text" id="digit-1" name="otp" data-next="digit-2" />
+      <input
+        type="text"
+        id="digit-2"
+        name="otp1"
+        data-next="digit-3"
+        data-previous="digit-1"
+      />
+      
+      <input
+        type="text"
+        id="digit-3"
+        name="otp2"
+        data-next="digit-4"
+        data-previous="digit-2"
+      />
+      <input
+        type="text"
+        id="digit-4"
+        name="otp3"
+        data-previous="digit-3"
+      />
+
+      <div style="padding-top:20px ;" class="container-login100-form-btn">
+        <button type="submit" class="login100-form-btn">
+            Verify
+        </button>
+    </div>
     </form>
-</body>
+
+
+
+
+
+
+
+    
+    <!--===============================================================================================-->
+    <script src="/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/vendor/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/vendor/bootstrap/js/popper.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/vendor/daterangepicker/moment.min.js"></script>
+    <script src="/vendor/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="/vendor/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="/js/main.js"></script>
+    <script>
+      $(".digit-group")
+        .find("input")
+        .each(function () {
+          $(this).attr("maxlength", 1);
+          $(this).on("keyup", function (e) {
+            var parent = $($(this).parent());
+            if (e.keyCode === 8 || e.keyCode === 37) {
+              var prev = parent.find("input#" + $(this).data("previous"));
+              if (prev.length) {
+                $(prev).select();
+              }
+            } else if (
+              (e.keyCode >= 48 && e.keyCode <= 57) ||
+              (e.keyCode >= 65 && e.keyCode <= 90) ||
+              (e.keyCode >= 96 && e.keyCode <= 105) ||
+              e.keyCode === 39
+            ) {
+              var next = parent.find("input#" + $(this).data("next"));
+              if (next.length) {
+                $(next).select();
+              } else {
+                if (parent.data("autosubmit")) {
+                  parent.submit();
+                }
+              }
+            }
+          });
+        });
+    </script>
+  </body>
 </html>
