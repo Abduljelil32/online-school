@@ -5,38 +5,79 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/dist/output.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/css/util.css" />
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="/public/css/tailwind.css" />
+
 </head>
+
 <body>
-    <button onclick="history.back()">Go Back</button>
-    <form action="/admin/dashboard">
-        <input type="submit" value="Dashboard">
-    </form>
-    <header>
-        <h2>Lincoln</h2>
-        <div>
-            <h4><%= student.Fname %> <%= student.Lname %> </h4>
-            <img src="<%= student.imgUrl %>" alt="<%= student.Fname %>" width="200px" height="200px" style="border-radius: 100px">
+        <!-- component -->
+<section class="py-20 bg-gray-100">
+    <div class="max-w-2xl py-0 mx-auto md:py-16">
+      <article class="overflow-hidden shadow-none md:shadow-md md:rounded-md">
+        <div class="bg-white md:rounded-b-md">
+          <div class="border-b border-gray-200 p-9">
+            <div class="space-y-6">
+              <div class="flex justify-between items-top">
+                <div class="space-y-4">
+                    <button onclick="history.back()" style="padding: 10px">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="30"
+                          height="30"
+                          fill="currentColor"
+                          class="bi bi-arrow-left"
+                          viewBox="0 0 16 16"
+                        >
+                          <path
+                            fill-rule="evenodd"
+                            d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"
+                          />
+                        </svg>
+                      </button>
+                  <div>
+              
+                    <img class="object-cover h-6 mb-4" src="<%= student.imgUrl %>" alt="<%= student.Fname %>" style="border-radius: 100px" width="100px" height="100px">
+                    <p class="text-lg font-bold"> <%= student.Fname %> <%= student.Lname %> </p>
+                    <p> Student </p>
+                  </div>
+                  <div>
+                    <% if (verify[0].RecieptIMG != null){ %>
+                    <img src="<%= verify[0].RecieptIMG %>" alt="Receipt" width="300px" height="400px" style="border-radius: 10px">
+                  </div>
+                </div>
+                <div class="space-y-2">
+                  <div>
+                    <form action="/approve/<%= verify[0].stdID %>" >
+                        <input type="submit" value="Confirm Payment" class="inline-flex items-center text-sm font-medium text-blue-500 hover:opacity-75 ">
+                    </form>
+                    <form action="/approve/<%= verify[0].stdID %>/decline">
+                        <input type="submit" value="Decline Payment" class="inline-flex items-center text-sm font-medium text-red-500 hover:opacity-75 ">
+                    </form>
+                  
+                  </div>
+               
+                  <div style="margin-top: 80%;">
+                    <% if (verify[0].Verified == false ) { %>
+                        <p class="text-sm font-medium text-gray-400" id="first"><b>Payment Status: </b><i style="color: red;">Pending</i> </p>
+                        <% } else { %>
+                        <p><b>Payment Status: </b><i style="color: green;">Approved</i> </p>
+                           <% } %>
+                        <p id="second" style="display: none;"><b>Payment Status: </b><i style="color: red;">DECLINED</i></p>
+                  </div>
+                </div>
+                <% } else { %>
+                    <p style="color: red;">PAYMENT WAS DECLINED</p>
+                <% } %> 
+              </div>
+            </div>
+          </div>
         </div>
-    </header>
-    <div>
-        <!-- <img src="https://res.cloudinary.com/solutech11/image/upload/v1664676914/lincolnPortal/courses/reciept/kej5j4stbhq7noypyscr.jpg" alt=""> -->
-        <% if (verify[0].RecieptIMG != null){ %>
-            <img src="<%= verify[0].RecieptIMG %>" alt="Receipt" width="300px" height="400px" style="border-radius: 10px">
-            <% if (verify[0].Verified == false ) { %>
-                <p id="first"><b>Payment Status: </b><i style="color: red;">Pending</i></p>
-            <% } else { %>
-                <p><b>Payment Status: </b><i style="color: green;">Approved</i></p>
-            <% } %>
-            <p id="second" style="display: none;"><b>Payment Status: </b><i style="color: red;">DECLINED</i></p>
-        </div>
-        <form action="/approve/<%= verify[0].stdID %>">
-            <input type="submit" value="Confirm Payment">
-        </form>
-        <form action="/approve/<%= verify[0].stdID %>/decline">
-            <input type="submit" value="Decline Payment">
-        </form>
-        <% } else { %>
-            <p style="color: red;">PAYMENT WAS DECLINED</p>
-        <% } %>
+      </article>
+    </div>
+  </section>
 </body>
 </html>

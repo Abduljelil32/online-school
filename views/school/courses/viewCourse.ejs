@@ -24,6 +24,10 @@
       rel="stylesheet"
     />
 
+    <!-- <script>
+        Math.floor(Math.random() * 100) + 1
+    </script> -->
+
     <style>
       /*Overrides for Tailwind CSS */
 
@@ -121,24 +125,90 @@
       }
     </style>
   </head>
+<body class="leading-normal tracking-wider text-gray-900 bg-gray-100">
+  <div
+  id="view"
+  class="flex flex-row w-screen h-full"
+  x-data="{ sidenav: true }"
+>
+  <div
+    id="sidebar"
+    class="h-screen px-3 overflow-x-hidden transition-transform duration-300 ease-in-out bg-black shadow-xl md:block w-30 md:w-60 lg:w-60"
+    x-show="sidenav"
+    @click.away="sidenav = false"
+  >
+    <div class="mt-16 space-y-6 md:space-y-10" style="margin-top: 50px">
+      <div style="margin-top: 50px">
+        <p class="text-lg text-center text-gray-300">Admin</p>
+      </div>
+    </div>
 
-  <body class="leading-normal tracking-wider text-gray-900 bg-gray-100">
+    <div id="menu" class="flex flex-col space-y-2" style="margin-top: 40%">
+      <a
+        href="/createCourse"
+        class="px-2 py-2 mt-10 text-sm font-medium text-gray-500 transition duration-150 ease-in-out rounded-md hover:bg-red-500 hover:text-white hover:text-base"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="inline-block w-6 h-6 fill-current bi bi-person-plus-fill"
+          viewBox="0 0 16 16"
+        >
+          <path
+            d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
+          />
+        </svg>
+        <span class="">Create Course</span>
+      </a>
+      <a
+        href="/logout"
+        class="px-2 py-2 text-sm font-medium text-gray-500 transition duration-150 ease-in-out rounded-md hover:bg-red-500 hover:text-white hover:scale-105"
+        style="margin-top: 20%"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="inline-block w-6 h-6 bi bi-box-arrow-left"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"
+          />
+          <path
+            fill-rule="evenodd"
+            d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"
+          />
+        </svg>
+        <span class="">Logout</span>
+      </a>
+    </div>
+  </div>
+
+
+
+
+
+
+  
+ 
     <!--Container-->
     <div class="container w-full px-2 mx-auto md:w-4/5 xl:w-3/5">
-      <h1 style="text-align: center; padding: 20px; font-size: 50px">
-        Admin DashBoard
-      </h1>
+      
       <!--Title-->
       <h1
         class="flex items-center px-2 py-8 font-sans text-xl font-bold text-red-500 break-normal md:text-2xl"
       >
         Courses Details
       </h1>
-
-      <form action="/createCourse">
-        <input type="submit" value="Create Course" />
-      </form>
-
       <!--Card-->
       <div id="recipients" class="p-8 mt-6 bg-white rounded shadow lg:mt-0">
         <table
@@ -154,13 +224,14 @@
               <th data-priority="4">Actions</th>
             </tr>
           </thead>
+          <% let a = Math.floor(Math.random() * 1000000) + 1 %>
           <tbody>
             <tr>
               <td><%= course.Name %></td>
               <td><%= course.CourseCode %></td>
               <td><%= course.Price %></td>
               <td>
-                <a href="/addNote">Add Note ||</a>
+                <a href="/addNote/<%= a %>">Add Note ||</a>
                 <a href="/addVideo" style="color: blue">
                   Add Video <span style="color: black">||</span></a
                 >

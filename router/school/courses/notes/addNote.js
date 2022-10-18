@@ -8,18 +8,20 @@ const noteMod = require('./../../../../model/school/Notes')
 
 const cloudinary = require('cloudinary')
 
-router.get('/', async (req, res) => {
+router.get('/:a', async (req, res) => {
     const sess= req.session
+    const bam = req.params.a
     if (sess.email && sess.password) {
         const courses = await courseMod.find()
         console.log(courses)
-        res.render('school/courses/notes/addNote',{ courses, msg: '' })
+        res.render('school/courses/notes/addNote',{ courses, msg: '', bam })
     } else {
         res.redirect('/admin')
     }
 })
 
-router.post('/', async (req, res) => {
+router.post('/:bam', async (req, res) => {
+    const fID = req.params.bam
     try {
         const courses = await courseMod.find()
         console.log(courses)
@@ -27,9 +29,10 @@ router.post('/', async (req, res) => {
         console.log(req.files)
         if (req.body.crsID != null && req.body.Name != null) {
             const note = req.files.Note
+            const check = noteMod.findOne({ })
             if (note.mimetype == 'application/pdf' || note.mimetype == 'application/msword') {
                 const upload = await cloudinary.v2.uploader.upload(note.tempFilePath, { resource_type: 'auto', folder: process.env.coursebook, use_filename: false, unique_filename:true })
-                const thisNote = await noteMod.findOne({ crsID: ' ' })
+                const thisNote = await noteMod.findOne({ crsID: fID })
                 // console.log(thisNote)
                 const data = {
                     crsID: req.body.crsID,
@@ -59,7 +62,8 @@ router.post('/', async (req, res) => {
     }
 })
 
-router.post('/cover', async (req, res) => {
+router.post('/cover/:bam', async (req, res) => {
+    const id = req.params.bam
     try {
         console.log(req.files)
         if (req.files != null) {
@@ -67,14 +71,14 @@ router.post('/cover', async (req, res) => {
             if (cover.mimetype=='image/apng' || cover.mimetype=='image/avif' ||cover.mimetype=='image/gif' || cover.mimetype=='image/jpeg' || cover.mimetype=='image/png' || cover.mimetype=='image/svg+xml' || cover.mimetype=='image/webp') {
                 const upload = await cloudinary.v2.uploader.upload(cover.tempFilePath, { resource_type: 'image', folder: process.env.coursebook, use_filename:false,unique_filename:true})
                 const addCover = new noteMod({
-                    crsID: ' ',
+                    crsID: id,
                     Name: ' ',
                     Note: ' ',
                     Cover: upload.secure_url,
                     PublicID: ' ',
                 })
                 await addCover.save()
-                res.redirect('/addNote')
+                res.redirect(`/addNote/${id}`)
             } else {
                 alert('Invalid File Type')
             }

@@ -123,109 +123,174 @@
   </head>
 
   <body class="leading-normal tracking-wider text-gray-900 bg-gray-100">
-    <!--Container-->
-    <div class="container w-full px-2 mx-auto md:w-4/5 xl:w-3/5">
-        <h1 style="text-align: center; padding: 20px; font-size: 50px;">Admin DashBoard</h1>
-      <!--Title-->
-      <h1
-        class="flex items-center px-2 py-8 font-sans text-xl font-bold text-red-500 break-normal md:text-2xl"
+    <div
+      id="view"
+      class="flex flex-row w-screen h-full"
+      x-data="{ sidenav: true }"
+    >
+      <div
+        id="sidebar"
+        class="h-screen px-3 overflow-x-hidden transition-transform duration-300 ease-in-out bg-black shadow-xl md:block w-30 md:w-60 lg:w-60"
+        x-show="sidenav"
+        @click.away="sidenav = false"
       >
-        Courses
-      </h1>
+        <div class="mt-16 space-y-6 md:space-y-10" style="margin-top: 50px">
+          <div style="margin-top: 50px">
+            <p class="text-lg text-center text-gray-300">Admin</p>
+          </div>
+        </div>
 
-      <form action="/createCourse">
-        <input type="submit" value="Create Course" />
-      </form>
-
-      <!--Card-->
-      <div id="recipients" class="p-8 mt-6 bg-white rounded shadow lg:mt-0">
-        <% if (courses.length > 0) { %>
-        <table
-          id="example"
-          class="stripe hover"
-          style="width: 100%; padding-top: 1em; padding-bottom: 1em"
-        >
-          <thead>
-            <tr>
-              <th data-priority="1">Course Code</th>
-              <th data-priority="2">Course Name</th>
-              <th data-priority="3">Course Price</th>
-              <th data-priority="4">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% courses.forEach(course => { %>
-            <tr>
-              <td><%= course.CourseCode %></td>
-              <td><%= course.Name %></td>
-              <td><%= course.Price %></td>
-              <td>
-                <a href="/viewCourse/<%= course._id %>">View ||</a>
-                <a href="/editCourse/<%= course._id %>" style="color: blue">
-                  Edit <span style="color: black">||</span></a
-                >
-                <a href="/deleteCourse/<%= course._id %>" style="color: red"
-                  >Delete</a
-                >
-              </td>
-            </tr>
-          </tbody>
-          <% }) %>
-        </table>
-        <% } else { %>
-        <p>There are no Courses</p>
-        <% } %>
+        <div id="menu" class="flex flex-col space-y-2" style="margin-top: 40%">
+          <a
+            href="/createCourse"
+            class="px-2 py-2 mt-10 text-sm font-medium text-gray-500 transition duration-150 ease-in-out rounded-md hover:bg-red-500 hover:text-white hover:text-base"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="inline-block w-6 h-6 fill-current bi bi-person-plus-fill"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M1 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H1zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M13.5 5a.5.5 0 0 1 .5.5V7h1.5a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0V8h-1.5a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"
+              />
+            </svg>
+            <span class="">Create Course</span>
+          </a>
+        
+          <a
+            href="/logout"
+            class="px-2 py-2 text-sm font-medium text-gray-500 transition duration-150 ease-in-out rounded-md hover:bg-red-500 hover:text-white hover:scale-105"
+            style="margin-top: 20%"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              class="inline-block w-6 h-6 bi bi-box-arrow-left"
+              viewBox="0 0 16 16"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z"
+              />
+              <path
+                fill-rule="evenodd"
+                d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z"
+              />
+            </svg>
+            <span class="">Logout</span>
+          </a>
+        </div>
       </div>
-      <!--/Card-->
-    </div>
-    <!--/container-->
 
-    <!--Container 2-->
-    <div class="container w-full px-2 mx-auto md:w-4/5 xl:w-3/5">
-      <!--Title-->
-      <h1
-        class="flex items-center px-2 py-8 font-sans text-xl font-bold text-red-500 break-normal md:text-2xl"
-      >
-        Students
-      </h1>
-
-      <!--Card-->
-      <div id="recipients" class="p-8 mt-6 bg-white rounded shadow lg:mt-0">
-        <% if (students.length > 0) { %>
-        <table
-          id="example"
-          class="stripe hover"
-          style="width: 100%; padding-top: 1em; padding-bottom: 1em"
+      <!--Container-->
+      <div class="container w-full px-2 mx-auto md:w-4/5 xl:w-3/5">
+        <!--Title-->
+        <h1
+          class="flex items-center px-2 py-8 font-sans text-xl font-bold text-red-500 break-normal md:text-2xl"
         >
-          <thead>
-            <tr>
-              <th data-priority="1">Full Name</th>
-              <th data-priority="2">Phone Number</th>
-              <th data-priority="3">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% students.forEach(student => { %>
-            <tr>
-              <td><%= student.Fname %> <%= student.Lname %></td>
-              <td><%= student.PhnNo %></td>
-              <td>
-                <a href="/student/<%= student._id %>/main">View ||</a>
-                <a href="/deleteStudent/<%= student._id %>" style="color: red"
-                  >Delete</a
-                >
-              </td>
-            </tr>
+          Courses
+        </h1>
+
+        <!--Card-->
+        <div id="recipients" class="p-8 mt-6 bg-white rounded shadow lg:mt-0">
+          <% if (courses.length > 0) { %>
+          <table
+            id="example"
+            class="stripe hover"
+            style="width: 100%; padding-top: 1em; padding-bottom: 1em"
+          >
+            <thead>
+              <tr>
+                <th data-priority="1">Course Code</th>
+                <th data-priority="2">Course Name</th>
+                <th data-priority="3">Course Price</th>
+                <th data-priority="4">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% courses.forEach(course => { %>
+              <tr>
+                <td><%= course.CourseCode %></td>
+                <td><%= course.Name %></td>
+                <td><%= course.Price %></td>
+                <td>
+                  <a href="/viewCourse/<%= course._id %>">View ||</a>
+                  <a href="/editCourse/<%= course._id %>" style="color: blue">
+                    Edit <span style="color: black">||</span></a
+                  >
+                  <a href="/deleteCourse/<%= course._id %>" style="color: red"
+                    >Delete</a
+                  >
+                </td>
+              </tr>
+            </tbody>
             <% }) %>
-          </tbody>
-        </table>
-
-        <% } else { %>
-        <p>There are no Students</p>
-        <% } %>
+          </table>
+          <% } else { %>
+          <p>There are no Courses</p>
+          <% } %>
+        </div>
+        <!--/Card-->
       </div>
-      <!--/Card-->
+      <!--/container-->
+
+      <!--Container 2-->
+      <div class="container w-full px-2 mx-auto md:w-4/5 xl:w-3/5">
+        <!--Title-->
+        <h1
+          class="flex items-center px-2 py-8 font-sans text-xl font-bold text-red-500 break-normal md:text-2xl"
+        >
+          Students
+        </h1>
+
+        <!--Card-->
+        <div id="recipients" class="p-8 mt-6 text-center bg-white rounded shadow lg:mt-0">
+          <% if (students.length > 0) { %>
+          <table
+            id="example"
+            class="stripe hover"
+            style="width: 100%; padding-top: 1em; padding-bottom: 1em"
+          >
+            <thead>
+              <tr>
+                <th data-priority="1">Full Name</th>
+                <th data-priority="2">Phone Number</th>
+                <th data-priority="3">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% students.forEach(student => { %>
+              <tr>
+                <td><%= student.Fname %> <%= student.Lname %></td>
+                <td><%= student.PhnNo %></td>
+                <td>
+                  <a href="/student/<%= student._id %>/main">View ||</a>
+                  <a href="/deleteStudent/<%= student._id %>" style="color: red"
+                    >Delete</a
+                  >
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+
+          <% } else { %>
+          <p>There are no Students</p>
+          <% } %>
+        </div>
+        <!--/Card-->
+      </div>
     </div>
+
     <!--/container-->
 
     <!-- jQuery -->

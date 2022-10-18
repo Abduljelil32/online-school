@@ -13,18 +13,14 @@ router.get('/:id', async (req, res, next) => {
     const sess = req.session
     if (sess.email && sess.password) {
         const id = req.params.id
-        // console.log(id)
         const course = await courseMod.findById({ _id: id })
         const students = await stdCRSMod.find({ crsID: id })
         const notes = await noteMod.find({ crsID: id })
         const videos = await videoMod.find({ crsID: id })
-        // const students = await stdCRSMod.find({ crsID: "6335a80924c854196b0d1484" })
-        // console.log(students)
     
         const studentID = []
     
         for (let i = 0; i <= students.length-1; i++){
-            // console.log(students[i])
             const dem = studentID.push(students[i].stdID)
         }
         // console.log(studentID)
